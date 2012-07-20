@@ -1,4 +1,4 @@
-package com.rullelinjeapp;
+package com.rullelinjeapp.activity;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,13 +21,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rullelinjeapp.R.id;
+import com.rullelinjeapp.R;
 
 public class MainActivity extends Activity {
 
 	final static private String TAG = "##### Main Activity";
-	final static String photoPath = Environment.getExternalStorageDirectory().getName() + File.separatorChar + "temp_photo.jpg";
-
+	final static String photoPath = Environment.getExternalStorageDirectory()
+			.getName() + File.separatorChar + "temp_photo.jpg";
 
 	private static final int CAMERA_PIC_REQUEST = 1;
 
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void setUpFinnKrengevinkel() {
-		Button finnKrengevinkelButton = (Button) findViewById(id.finnKrengevinkel);
+		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengevinkel);
 		finnKrengevinkelButton
 				.setOnClickListener(finnKrengevinkelButtonListener);
 
@@ -65,7 +65,8 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			logm("clicked krengebutton.");
 
-			Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+			Intent cameraIntent = new Intent(
+					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
 			File _photoFile = new File(photoPath);
 			try {
@@ -86,10 +87,11 @@ public class MainActivity extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAMERA_PIC_REQUEST) {
-			logm("Camera onActivityResult!" );
+			logm("Camera onActivityResult!");
 			if (resultCode == Activity.RESULT_OK) {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-				Toast.makeText(context, "bildet er lagret", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "bildet er lagret", Toast.LENGTH_LONG)
+						.show();
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
