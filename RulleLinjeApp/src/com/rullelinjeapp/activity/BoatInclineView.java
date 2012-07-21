@@ -2,7 +2,7 @@ package com.rullelinjeapp.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-
+/// commentararar
 import com.rullelinjeapp.R;
 
 public class BoatInclineView extends Activity{
