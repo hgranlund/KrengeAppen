@@ -1,5 +1,5 @@
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
@@ -19,20 +19,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Båt 2" />
-
+
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
                 android:text="Båt 3" />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="421dp"
-            android:layout_height="wrap_content"
+        <com.rullelinjeapp.customviews.DrawingBoatLines
+            android:id="@+id/draw_boat_lines"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="0.39"
             android:src="@drawable/ic_action_search" />
 
@@ -40,6 +39,11 @@
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finn ny krengevinkel" />
 
-    </LinearLayout>
+            android:text="Finn ny krengevinkel" 
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
