@@ -1,5 +1,13 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@string/blue" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+=======
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
@@ -13,10 +21,39 @@
 
         <Button
             android:id="@+id/finnKrengevinkel"
+>>>>>>> 5441153a9da9b9ca0c434b283300d85603bfe13d
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+<<<<<<< HEAD
+            android:src="@drawable/boat3" />
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="46dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/finnKrengevinkel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Finn krengevinkel" />
+
+            <Button
+                android:id="@+id/instruksjon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Instruksjoner" />
+
+        </LinearLayout>
+=======
             android:layout_toLeftOf="@+id/instruksjon"
             android:text="Finn krengevinkel" />
+>>>>>>> 5441153a9da9b9ca0c434b283300d85603bfe13d
 
     </RelativeLayout>
