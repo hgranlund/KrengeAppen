@@ -2,12 +2,24 @@
     package="com.rullelinjeapp"
     android:versionCode="1"
     android:versionName="1.0" >
+<<<<<<< HEAD
 	 <uses-permission android:name="android.permission.CAMERA" />
 	 <uses-feature android:name="android.hardware.camera" />
 	 <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="16" />
+=======
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="15" />
+>>>>>>> 97f34236e7e919f86e1b2edea101f85aa5624c0e
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -22,11 +34,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
                 <activity
             android:name=".activity.Result"
             android:label="@string/title_activity_result" >
             <intent-filter>
 
+=======
+        <activity
+            android:name=".activity.Result"
+            android:label="@string/title_activity_result" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+>>>>>>> 97f34236e7e919f86e1b2edea101f85aa5624c0e
             </intent-filter>
         </activity>
     </application>

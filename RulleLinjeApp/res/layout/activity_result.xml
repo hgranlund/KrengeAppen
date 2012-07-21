@@ -7,9 +7,36 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
+<<<<<<< HEAD
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
+=======
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Båt 1" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Båt 2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="0.05"
+                android:text="Båt 3" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="421dp"
+>>>>>>> 97f34236e7e919f86e1b2edea101f85aa5624c0e
             android:layout_height="wrap_content"
             android:text="Båt 1" />
 
