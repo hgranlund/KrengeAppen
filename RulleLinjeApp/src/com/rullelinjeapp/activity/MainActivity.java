@@ -1,4 +1,3 @@
-
 package com.rullelinjeapp.activity;
 
 import java.io.File;
@@ -51,7 +50,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		// getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
@@ -118,9 +117,13 @@ public class MainActivity extends Activity {
 		Button instruksjonButton = (Button) findViewById(R.id.instruksjon);
 		instruksjonButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				dialog.show();
+				Intent ResultIntent = new Intent(MainActivity.this,
+						BoatInclineView.class);
+				ResultIntent.putExtra("angle", 0.5);
+				MainActivity.this.startActivity(ResultIntent);
+
+				// dialog.show();
 			}
 		});
 	}
 }
-

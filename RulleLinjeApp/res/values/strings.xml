@@ -6,5 +6,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_result">Resultat</string>
 	<string name="instruksjoner_hovedside">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales consequat erat, at ornare augue sodales at. Duis euismod lorem at magna euismod lacinia. Mauris interdum placerat diam quis vestibulum. Integer pellentesque porttitor augue, eget imperdiet nibh lobortis at. Duis a lorem vel libero accumsan posuere a eu turpis. Curabitur feugiat accumsan quam, ut condimentum elit euismod nec. Aliquam erat volutpat. Sed egestas mollis porta. Aenean tristique nibh ut mi congue vitae rutrum lacus tempus. Praesent elementum libero in quam varius porta.</string>
-	<string name="blue">#005ba6</string>
+	<color name="blue">#005ba6</color>
 </resources>

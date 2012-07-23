@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-public class DrawingBoatLines extends View {
+public class  DrawingBoatLines extends View {
 	final static private String TAG = "##### DrawingBoatLines";
 
 	public void logm(String line) {
@@ -39,7 +39,10 @@ public class DrawingBoatLines extends View {
 	private int getYAxes(){
 		int numberOfLines = getHeight()/cellWidth;
 		return (int) (numberOfLines * 2.0 / 3.0 * cellWidth); 
-//		return getHeight()/2;
+	}
+	private int getXAxes(){
+		int numberOfLines = getWidth()/cellWidth;
+		return (int) (numberOfLines / 2.0 * cellWidth); 
 	}
 
 	private float[] getPointsFromAngle(double angle){
@@ -48,6 +51,7 @@ public class DrawingBoatLines extends View {
 				 		 getWidth(),getYAxes()-kat};
 		return points; 
 	}
+	
 
 
 	@Override
@@ -69,6 +73,13 @@ public class DrawingBoatLines extends View {
 		}
 		
 		canvas.drawLines(getPointsFromAngle(0.5), blue);
+		
+		float yAxes = getXAxes();
+		canvas.drawRect(yAxes-2, getTop(), yAxes+2, getBottom(), black);
+		float xAxes = getYAxes();
+		canvas.drawRect(0, xAxes-2, getWidth(), xAxes+2, black);
+		
+		
 		
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
