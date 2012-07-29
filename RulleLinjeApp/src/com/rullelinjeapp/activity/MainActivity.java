@@ -26,7 +26,6 @@ import com.rullelinjeapp.R;
 public class MainActivity extends Activity {
 
 	final static private String TAG = "##### Main Activity";
-	Button camera_button;
 
 	public void logm(String line) {
 		Log.i(TAG, line);

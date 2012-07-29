@@ -68,6 +68,10 @@ public class DrawingBoatLines extends View {
 		float[] points = { 0, getYAxes() + kat, getWidth(), getYAxes() - kat };
 		return points;
 	}
+	
+	private void saveCanvas(){
+		//TODO save canvas as image...
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
