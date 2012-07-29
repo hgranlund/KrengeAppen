@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 			logm("Camera onActivityResult!");
 			if (resultCode == Activity.RESULT_OK) {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-				Toast.makeText(context, "bildet er lagret", Toast.LENGTH_LONG)
+				Toast.makeText(context,TAG + " bildet er lagret", Toast.LENGTH_LONG)
 						.show();
 			} else {
 				logm("Taking picture failed. Try again!");
