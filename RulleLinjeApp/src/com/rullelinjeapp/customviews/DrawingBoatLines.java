@@ -50,7 +50,6 @@ public class DrawingBoatLines extends View {
 		cyan.setColor(Color.CYAN);
 		green.setColor(Color.GREEN);
 		yellow.setColor(Color.YELLOW);
-		angels.add(0.5);
 		selectedAngle = 0;
 	}
 
@@ -74,7 +73,6 @@ public class DrawingBoatLines extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		gridBottom = getBottom() - getHeight() % cellWidth;
-
 		// draw grid
 		for (int i = 0; i <= getWidth(); i += cellWidth) {
 			canvas.drawLine(i, getTop(), i, gridBottom, black);
@@ -95,7 +93,7 @@ public class DrawingBoatLines extends View {
 		
 		// draw axes
 		float yAxes = getXAxes();
-		canvas.drawRect(yAxes - 2, getTop(), yAxes + 2, getBottom(), black);
+		canvas.drawRect(yAxes - 2, getTop(), yAxes + 2, gridBottom, black);
 		float xAxes = getYAxes();
 		canvas.drawRect(0, xAxes - 2, getWidth(), xAxes + 2, black);
 
