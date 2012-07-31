@@ -2,10 +2,16 @@ package com.rullelinjeapp.customviews;
 
 import java.util.ArrayList;
 
+import com.rullelinjeapp.R;
+
+import android.R.id;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -69,9 +75,7 @@ public class DrawingBoatLines extends View {
 		return points;
 	}
 	
-	private void saveCanvas(){
-		//TODO save canvas as image...
-	}
+
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -89,6 +93,12 @@ public class DrawingBoatLines extends View {
 		for (int i = 0; i < angels.size(); i++) {
 			canvas.drawLines(getPointsFromAngle(angels.get(i)), paints[i%lenPaints]);
 		}
+		Bitmap boat = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		canvas.drawBitmap(boat, 500	, 500, null);
+		
+		
+		//TODO Draw boat 
+		//TODO Draw fatLine
 		
 		//draw selectedBoat
 //		float[] points =getPointsFromAngle(angels.get(selectedAngle));

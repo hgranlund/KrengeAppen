@@ -1,12 +1,15 @@
 package com.rullelinjeapp.activity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +32,8 @@ public class BoatInclineView extends Activity{
 	}
 	final static String photoPath = Environment.getExternalStorageDirectory()
 			.getName() + File.separatorChar + "temp_photo.jpg";
-
+	final static String basePath = Environment.getExternalStorageDirectory()
+			.getName() + File.separatorChar + "SavedCanvas" + File.pathSeparatorChar;
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
 	@Override
@@ -39,6 +43,24 @@ public class BoatInclineView extends Activity{
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
 		startCamera();
 		setUpFinnKrengevinkel();
+	}
+	
+	private void saveCanvas(int boatNumber){
+		FileOutputStream fileOutPut;
+		try {
+			fileOutPut = new FileOutputStream(new File(basePath + "båtNummer" +boatNumber));
+			Bitmap  bitmap = Bitmap.createBitmap( angleLineView.getWidth(), angleLineView.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmap);
+			angleLineView.draw(canvas); 
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutPut); 
+			logm("Lagret Canvas");
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			logm("Klarte ikke lagre canvas");
+		}
+
+		//TODO save canvas as image...
 	}
 	
 	private void startCamera(){
@@ -84,6 +106,7 @@ public class BoatInclineView extends Activity{
 				Toast.makeText(getApplicationContext(),TAG + " bildet er lagret", Toast.LENGTH_LONG)
 						.show();
 				angleLineView.setAngle(Math.random());
+				saveCanvas(0);
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
