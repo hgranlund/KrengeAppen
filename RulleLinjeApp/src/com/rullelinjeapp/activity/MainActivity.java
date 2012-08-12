@@ -1,25 +1,15 @@
 package com.rullelinjeapp.activity;
 
-import java.io.File;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rullelinjeapp.R;
 
@@ -42,7 +32,6 @@ public class MainActivity extends Activity {
 
 	}
 
-
 	private void setUpFinnKrengevinkel() {
 		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengevinkel);
 		finnKrengevinkelButton
@@ -58,7 +47,6 @@ public class MainActivity extends Activity {
 			MainActivity.this.startActivity(ResultIntent);
 		}
 	};
-
 
 	private void setUpDialog() {
 		final Dialog dialog = new Dialog(context);
@@ -79,7 +67,7 @@ public class MainActivity extends Activity {
 		Button instruksjonButton = (Button) findViewById(R.id.instruksjon);
 		instruksjonButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				 dialog.show();
+				dialog.show();
 			}
 		});
 	}

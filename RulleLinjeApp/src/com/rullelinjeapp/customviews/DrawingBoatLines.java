@@ -2,20 +2,17 @@ package com.rullelinjeapp.customviews;
 
 import java.util.ArrayList;
 
-import com.rullelinjeapp.R;
-
-import android.R.id;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.rullelinjeapp.R;
 
 public class DrawingBoatLines extends View {
 	final static private String TAG = "##### DrawingBoatLines";
@@ -32,7 +29,7 @@ public class DrawingBoatLines extends View {
 	Paint[] paints = { blue, cyan, green, yellow };
 	int cellWidth;
 	int gridBottom;
-	int selectedAngle;
+	int selectedAngleIndex;
 	public ArrayList<Double> angles = new ArrayList<Double>();
 
 	public DrawingBoatLines(Context context, AttributeSet attrs) {
@@ -40,9 +37,16 @@ public class DrawingBoatLines extends View {
 		pupulateVariables();
 	}
 
-	public void setAngle(double angle) {
+	public int setAngle(double angle) {
 		angles.add(angle);
-		selectedAngle = angles.size() - 1;
+		selectedAngleIndex = angles.size() - 1;
+		this.invalidate();
+		return selectedAngleIndex;
+	}
+	
+	public void setSelectedIndex(int index){
+		selectedAngleIndex=index;
+		this.invalidate();
 	}
 
 	public DrawingBoatLines(Context context) {
@@ -57,7 +61,7 @@ public class DrawingBoatLines extends View {
 		cyan.setColor(Color.CYAN);
 		green.setColor(Color.GREEN);
 		yellow.setColor(Color.YELLOW);
-		selectedAngle = 0;
+		selectedAngleIndex = 0;
 	}
 
 	private int getYAxes() {
@@ -90,12 +94,12 @@ public class DrawingBoatLines extends View {
 		// draw angelLines
 		int lenPaints = paints.length;
 		if (angleToDraw == 999) {
-			paints[selectedAngle % lenPaints].setStrokeWidth(5);
+			paints[selectedAngleIndex % lenPaints].setStrokeWidth(5);
 			for (int i = 0; i < angles.size(); i++) {
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
 						% lenPaints]);
 			}
-			paints[selectedAngle % lenPaints].setStrokeWidth(0);
+			paints[selectedAngleIndex % lenPaints].setStrokeWidth(0);
 		} else {
 			paints[angleToDraw % lenPaints].setStrokeWidth(5);
 			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)),

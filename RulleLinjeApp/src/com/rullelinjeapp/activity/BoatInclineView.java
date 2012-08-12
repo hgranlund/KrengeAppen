@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,14 +35,14 @@ public class BoatInclineView extends Activity {
 	public void logm(String line) {
 		Log.i(TAG, line);
 	}
-
+	
 	final static String basePath = Environment.getExternalStorageDirectory()
 			.toString() + "/BoatApp";
 	final static int ID_MENU_SAVE_CANVAS = 1;
 	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
-
+	ArrayList<Button> angleButtons;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,11 +61,11 @@ public class BoatInclineView extends Activity {
 			baseFile.mkdirs();
 		}
 		startCamera();
-		setUpFinnKrengevinkel();
+		setUpButtons();
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
 	}
-	
-	private void saveAllAngleLines(){
+
+	private void saveAllAngleLines() {
 		for (int i = 0; i < angleLineView.angles.size(); i++) {
 			saveCanvas(i);
 		}
@@ -72,7 +73,8 @@ public class BoatInclineView extends Activity {
 
 	private void saveCanvas(int boatNumber) {
 		FileOutputStream fileOutPut = null;
-		File file = new File(basePath + File.separator + "BaatNummer"+(boatNumber+1)+".jpg");
+		File file = new File(basePath + File.separator + "BaatNummer"
+				+ (boatNumber + 1) + ".jpg");
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
@@ -115,12 +117,28 @@ public class BoatInclineView extends Activity {
 		startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
 	}
 
-	private void setUpFinnKrengevinkel() {
+	private void setUpButtons() {
+		angleButtons = new ArrayList<Button>();
+		angleButtons.add((Button) findViewById(id.boat1));
+		angleButtons.add((Button) findViewById(id.boat2));
+		angleButtons.add((Button) findViewById(id.boat3));
+		angleButtons.add((Button) findViewById(id.boat4));
+		for (int i=0; i<angleButtons.size() ;i++){
+			final int index = i;
+			angleButtons.get(i).setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					angleLineView.setSelectedIndex(index);
+					
+				}
+			});
+			
+		}
 		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengeVinkel_Result);
 		finnKrengevinkelButton
 				.setOnClickListener(finnKrengevinkelButtonListener);
 
 	}
+	
 
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
 		public void onClick(View v) {
@@ -135,32 +153,33 @@ public class BoatInclineView extends Activity {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
 				Toast.makeText(getApplicationContext(),
 						TAG + " bildet er lagret", Toast.LENGTH_LONG).show();
-				angleLineView.setAngle(Math.random());
-				angleLineView.invalidate();
+				addAngle(Math.random());
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
 		}
 	}
 	
-	//andoird menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        menu.add(Menu.NONE,ID_MENU_SAVE_CANVAS,Menu.NONE,R.string.menu_save_all_lines);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-    	if(item.getItemId() == ID_MENU_SAVE_CANVAS)
-    	{
-    		saveAllAngleLines();
-    		return true;
-    	}
-    	return false;
-    }
+	private void addAngle(Double angle){
+		int angleIndex = angleLineView.setAngle(angle);
+		angleButtons.get(angleIndex).setVisibility(0);		
+	}
 
+	// andoird menu
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(Menu.NONE, ID_MENU_SAVE_CANVAS, Menu.NONE,
+				R.string.menu_save_all_lines);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == ID_MENU_SAVE_CANVAS) {
+			saveAllAngleLines();
+			return true;
+		}
+		return false;
+	}
 
 }
