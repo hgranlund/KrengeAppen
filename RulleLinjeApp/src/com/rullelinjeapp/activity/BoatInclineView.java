@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,34 +33,60 @@ public class BoatInclineView extends Activity{
 	public void logm(String line) {
 		Log.i(TAG, line);
 	}
-	final static String photoPath = Environment.getExternalStorageDirectory()
-			.getName() + File.separatorChar + "temp_photo.jpg";
+
 	final static String basePath = Environment.getExternalStorageDirectory()
-			.getName() + File.separatorChar + "SavedCanvas" + File.pathSeparatorChar;
+			.toString()+"/BoatApp";
+	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
-		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
+		File baseFile = new File(basePath);
+		if (!baseFile.exists()){
+			try {
+				baseFile.mkdirs();
+				baseFile.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			baseFile.mkdirs();
+		}
 		startCamera();
 		setUpFinnKrengevinkel();
+		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
 	}
 	
 	private void saveCanvas(int boatNumber){
-		FileOutputStream fileOutPut;
+		FileOutputStream fileOutPut = null;
+		File file = new File(basePath +File.separator+ "boatNummer.jpg");
 		try {
-			fileOutPut = new FileOutputStream(new File(basePath + "båtNummer" +boatNumber));
+			
+			if (!file.exists()){
+				file.createNewFile();
+			}
+			logm("filen finnes!");
+			fileOutPut = new FileOutputStream(file);
 			Bitmap  bitmap = Bitmap.createBitmap( angleLineView.getWidth(), angleLineView.getHeight(), Bitmap.Config.ARGB_8888);
 			Canvas canvas = new Canvas(bitmap);
-			angleLineView.draw(canvas); 
+			canvas.drawColor(Color.WHITE);
+			angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
+			angleLineView.drawR(canvas, boatNumber); 
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutPut); 
 			logm("Lagret Canvas");
-			
+			fileOutPut.flush();
+			fileOutPut.close();
+			fileOutPut = null;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			logm("Klarte ikke lagre canvas");
+		} catch (IOException e) {
+			logm("Klarte ikke lage fil");
+			e.printStackTrace();
 		}
 
 		//TODO save canvas as image...
@@ -72,14 +101,13 @@ public class BoatInclineView extends Activity{
 		File _photoFile = new File(photoPath);
 		try {
 			if (_photoFile.exists() == false) {
-				_photoFile.getParentFile().mkdirs();
 				_photoFile.createNewFile();
 			}
 		} catch (IOException e) {
 			Log.e(TAG, "Could not create file.", e);
 		}
 		Log.i(TAG + " photo path: ", photoPath);
-
+		
 		Uri _fileUri = Uri.fromFile(_photoFile);
 		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, _fileUri);
 		startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
@@ -106,7 +134,6 @@ public class BoatInclineView extends Activity{
 				Toast.makeText(getApplicationContext(),TAG + " bildet er lagret", Toast.LENGTH_LONG)
 						.show();
 				angleLineView.setAngle(Math.random());
-				saveCanvas(0);
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
