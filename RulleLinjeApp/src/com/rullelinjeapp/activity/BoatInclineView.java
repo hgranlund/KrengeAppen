@@ -74,17 +74,14 @@ public class BoatInclineView extends Activity {
 		FileOutputStream fileOutPut = null;
 		File file = new File(basePath + File.separator + "BaatNummer"+(boatNumber+1)+".jpg");
 		try {
-
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			logm("filen finnes!");
 			fileOutPut = new FileOutputStream(file);
 			Bitmap bitmap = Bitmap.createBitmap(angleLineView.getWidth(),
 					angleLineView.getHeight(), Bitmap.Config.ARGB_8888);
 			Canvas canvas = new Canvas(bitmap);
 			canvas.drawColor(Color.WHITE);
-			angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
 			angleLineView.drawR(canvas, boatNumber);
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutPut);
 			logm("Lagret Canvas");
@@ -102,10 +99,8 @@ public class BoatInclineView extends Activity {
 
 	private void startCamera() {
 		logm("clicked krengebutton.");
-
 		Intent cameraIntent = new Intent(
 				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
 		File _photoFile = new File(photoPath);
 		try {
 			if (_photoFile.exists() == false) {
@@ -115,7 +110,6 @@ public class BoatInclineView extends Activity {
 			Log.e(TAG, "Could not create file.", e);
 		}
 		Log.i(TAG + " photo path: ", photoPath);
-
 		Uri _fileUri = Uri.fromFile(_photoFile);
 		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, _fileUri);
 		startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
@@ -153,7 +147,7 @@ public class BoatInclineView extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        menu.add(Menu.NONE,ID_MENU_SAVE_CANVAS,Menu.NONE,"kk");
+        menu.add(Menu.NONE,ID_MENU_SAVE_CANVAS,Menu.NONE,R.string.menu_save_all_lines);
         return true;
     }
     

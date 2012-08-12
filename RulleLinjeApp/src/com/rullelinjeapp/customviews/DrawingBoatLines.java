@@ -42,7 +42,7 @@ public class DrawingBoatLines extends View {
 
 	public void setAngle(double angle) {
 		angles.add(angle);
-		selectedAngle =  angles.size()-1;
+		selectedAngle = angles.size() - 1;
 	}
 
 	public DrawingBoatLines(Context context) {
@@ -90,30 +90,23 @@ public class DrawingBoatLines extends View {
 		// draw angelLines
 		int lenPaints = paints.length;
 		if (angleToDraw == 999) {
-			paints[selectedAngle% lenPaints].setStrokeWidth(5);
+			paints[selectedAngle % lenPaints].setStrokeWidth(5);
 			for (int i = 0; i < angles.size(); i++) {
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
 						% lenPaints]);
 			}
-			paints[selectedAngle% lenPaints].setStrokeWidth(0);
-		}
-		else {
-			paints[angleToDraw% lenPaints].setStrokeWidth(5);
-			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)), paints[angleToDraw% lenPaints]);
-			paints[angleToDraw% lenPaints].setStrokeWidth(0);
+			paints[selectedAngle % lenPaints].setStrokeWidth(0);
+		} else {
+			paints[angleToDraw % lenPaints].setStrokeWidth(5);
+			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)),
+					paints[angleToDraw % lenPaints]);
+			paints[angleToDraw % lenPaints].setStrokeWidth(0);
 		}
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
 				R.drawable.ic_launcher);
 		canvas.drawBitmap(boat, 500, 500, null);
 
 		// TODO Draw boat
-		// TODO Draw fatLine
-
-		// draw selectedBoat
-		// float[] points =getPointsFromAngle(angels.get(selectedAngle));
-		// Rect rect = new Rect((int)points[0], (int)points[1], (int)points[2],
-		// (int)points[3]);
-		// canvas.drawRect(rect, paints[selectedAngle%lenPaints]);
 
 		// draw axes
 		float yAxes = getXAxes();
@@ -125,7 +118,7 @@ public class DrawingBoatLines extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		drawR(canvas,999);
+		drawR(canvas, 999);
 
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
