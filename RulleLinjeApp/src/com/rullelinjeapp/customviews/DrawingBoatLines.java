@@ -40,8 +40,9 @@ public class DrawingBoatLines extends View {
 		pupulateVariables();
 	}
 
-	public void setAngle(double angel) {
-		angles.add(angel);
+	public void setAngle(double angle) {
+		angles.add(angle);
+		selectedAngle =  angles.size()-1;
 	}
 
 	public DrawingBoatLines(Context context) {
@@ -88,15 +89,18 @@ public class DrawingBoatLines extends View {
 
 		// draw angelLines
 		int lenPaints = paints.length;
-
-		if (angleToDraw == -1) {
+		if (angleToDraw == 999) {
+			paints[selectedAngle% lenPaints].setStrokeWidth(5);
 			for (int i = 0; i < angles.size(); i++) {
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
 						% lenPaints]);
 			}
+			paints[selectedAngle% lenPaints].setStrokeWidth(0);
 		}
 		else {
+			paints[angleToDraw% lenPaints].setStrokeWidth(5);
 			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)), paints[angleToDraw% lenPaints]);
+			paints[angleToDraw% lenPaints].setStrokeWidth(0);
 		}
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
 				R.drawable.ic_launcher);
@@ -121,7 +125,7 @@ public class DrawingBoatLines extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		drawR(canvas, -1);
+		drawR(canvas,999);
 
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
