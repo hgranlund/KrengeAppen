@@ -1,8 +1,7 @@
 <resources>
-
     <string name="app_name">RulleLinjeApp</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_save_all_lines">Lagre krengevinkler</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_result">Resultat</string>
 	<string name="instruksjoner_hovedside">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales consequat erat, at ornare augue sodales at. Duis euismod lorem at magna euismod lacinia. Mauris interdum placerat diam quis vestibulum. Integer pellentesque porttitor augue, eget imperdiet nibh lobortis at. Duis a lorem vel libero accumsan posuere a eu turpis. Curabitur feugiat accumsan quam, ut condimentum elit euismod nec. Aliquam erat volutpat. Sed egestas mollis porta. Aenean tristique nibh ut mi congue vitae rutrum lacus tempus. Praesent elementum libero in quam varius porta.</string>

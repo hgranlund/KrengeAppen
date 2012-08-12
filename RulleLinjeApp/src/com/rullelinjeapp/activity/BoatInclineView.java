@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,6 +37,7 @@ public class BoatInclineView extends Activity {
 
 	final static String basePath = Environment.getExternalStorageDirectory()
 			.toString() + "/BoatApp";
+	final static int ID_MENU_SAVE_CANVAS = 1;
 	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
@@ -61,11 +64,15 @@ public class BoatInclineView extends Activity {
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
 	}
 	
-	
+	private void saveAllAngleLines(){
+		for (int i = 0; i < angleLineView.angles.size(); i++) {
+			saveCanvas(i);
+		}
+	}
 
 	private void saveCanvas(int boatNumber) {
 		FileOutputStream fileOutPut = null;
-		File file = new File(basePath + File.separator + "boatNummer.jpg");
+		File file = new File(basePath + File.separator + "BaatNummer"+(boatNumber+1)+".jpg");
 		try {
 
 			if (!file.exists()) {
@@ -141,5 +148,25 @@ public class BoatInclineView extends Activity {
 			}
 		}
 	}
+	
+	//andoird menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        menu.add(Menu.NONE,ID_MENU_SAVE_CANVAS,Menu.NONE,"kk");
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	if(item.getItemId() == ID_MENU_SAVE_CANVAS)
+    	{
+    		saveAllAngleLines();
+    		return true;
+    	}
+    	return false;
+    }
+
 
 }
