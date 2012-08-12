@@ -128,18 +128,14 @@ public class BoatInclineView extends Activity {
 			angleButtons.get(i).setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					angleLineView.setSelectedIndex(index);
-					
 				}
 			});
-			
 		}
 		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengeVinkel_Result);
 		finnKrengevinkelButton
 				.setOnClickListener(finnKrengevinkelButtonListener);
-
 	}
 	
-
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
 		public void onClick(View v) {
 			startCamera();

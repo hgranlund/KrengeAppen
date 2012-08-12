@@ -7,10 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.rullelinjeapp.R;
 
@@ -108,7 +110,18 @@ public class DrawingBoatLines extends View {
 		}
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
 				R.drawable.ic_launcher);
-		canvas.drawBitmap(boat, 500, 500, null);
+		Matrix matrix = new Matrix();
+		double rad = -angles.get(selectedAngleIndex);
+		float sin = (float) Math.sin(rad);
+		float cos = (float) Math.cos(rad);
+		float[] points =   {cos,-sin,getXAxes()-((boat.getWidth()/2)*cos),
+						    sin,cos,getYAxes()-((boat.getWidth()/2)*sin),
+						    0F,0F,1F};
+		
+		matrix.setValues(points);
+		Toast.makeText(getContext(),
+				matrix.toString(), Toast.LENGTH_LONG).show();
+		canvas.drawBitmap(boat, matrix, null);
 
 		// TODO Draw boat
 
