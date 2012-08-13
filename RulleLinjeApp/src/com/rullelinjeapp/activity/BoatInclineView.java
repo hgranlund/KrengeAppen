@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.rullelinjeapp.R;
 import com.rullelinjeapp.R.id;
 import com.rullelinjeapp.customviews.DrawingBoatLines;
+import com.rullelinjeapp.util.TTFLine;
 
 public class BoatInclineView extends Activity {
 	final static private String TAG = "##### BoatInclineView";
@@ -43,12 +44,14 @@ public class BoatInclineView extends Activity {
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
 	ArrayList<Button> angleButtons;
+	TTFLine tTFLine;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		setContentView(R.layout.activity_result);
+		tTFLine = new TTFLine();
 		File baseFile = new File(basePath);
 		if (!baseFile.exists()) {
 			try {
@@ -63,6 +66,7 @@ public class BoatInclineView extends Activity {
 		startCamera();
 		setUpButtons();
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
+		
 	}
 
 	private void saveAllAngleLines() {
@@ -149,7 +153,7 @@ public class BoatInclineView extends Activity {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
 				Toast.makeText(getApplicationContext(),
 						TAG + " bildet er lagret", Toast.LENGTH_LONG).show();
-				addAngle(Math.random());
+				addAngle(tTFLine.findAngle(Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/10, bitmap.getHeight()/10, false)));
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
@@ -157,6 +161,10 @@ public class BoatInclineView extends Activity {
 	}
 	
 	private void addAngle(Double angle){
+		if (angle== 999){
+			Toast.makeText(getApplicationContext(), "MagicLine!", Toast.LENGTH_SHORT).show();
+			angle=Math.random();
+		}
 		int angleIndex = angleLineView.setAngle(angle);
 		if (angleIndex >2){
 			((Button) findViewById(id.finnKrengeVinkel_Result)).setEnabled(false);

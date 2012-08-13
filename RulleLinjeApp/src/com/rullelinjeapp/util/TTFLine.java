@@ -4,13 +4,13 @@ import android.graphics.Color;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.widget.Toast;
 
 public class TTFLine {
 
 	// Bitmap bitmap = BitmapFactory.decodeFile(filename)
 
 	public double findAngle(Bitmap img) {
-
 		LineDetector lineDetector = new LineDetector();
 
 		int w = img.getWidth();
@@ -28,10 +28,11 @@ public class TTFLine {
 		h = filteredPixels[0].length;
 
 		ArrayList<int[]> lines = lineDetector.getCandidateLines(filteredPixels,
-				100);
+				70);
 		lines = lineDetector.reduceCandidates(lines);
-
-		return calcAngle(lines.get(0), lines.get(1));
+		
+		
+		return lines.size()<2 ? 999:calcAngle(lines.get(0), lines.get(1));
 	}
 
 	public double calcAngle(int[] line1, int[] line2) {
