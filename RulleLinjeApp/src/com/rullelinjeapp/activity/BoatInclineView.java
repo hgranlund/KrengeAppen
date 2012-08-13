@@ -29,7 +29,6 @@ import android.widget.Toast;
 import com.rullelinjeapp.R;
 import com.rullelinjeapp.R.id;
 import com.rullelinjeapp.customviews.DrawingBoatLines;
-import com.rullelinjeapp.util.TTFLine;
 
 public class BoatInclineView extends Activity {
 	final static private String TAG = "##### BoatInclineView";
@@ -37,15 +36,16 @@ public class BoatInclineView extends Activity {
 	public void logm(String line) {
 		Log.i(TAG, line);
 	}
-	
+
 	final static String basePath = Environment.getExternalStorageDirectory()
 			.toString() + "/BoatApp";
 	final static int ID_MENU_SAVE_CANVAS = 1;
 	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
+
 	DrawingBoatLines angleLineView;
 	ArrayList<ImageButton> angleButtons;
-	TTFLine tTFLine;
+//	TTFLine tTFLine;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class BoatInclineView extends Activity {
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		setContentView(R.layout.activity_result);
+//		tTFLine = new TTFLine();
 		File baseFile = new File(basePath);
 		if (!baseFile.exists()) {
 			try {
@@ -67,6 +68,7 @@ public class BoatInclineView extends Activity {
 		startCamera();
 		setUpButtons();
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
+
 	}
 
 	private void saveAllAngleLines() {
@@ -127,7 +129,7 @@ public class BoatInclineView extends Activity {
 		angleButtons.add((ImageButton) findViewById(id.boat2));
 		angleButtons.add((ImageButton) findViewById(id.boat3));
 		angleButtons.add((ImageButton) findViewById(id.boat4));
-		for (int i=0; i<angleButtons.size() ;i++){
+		for (int i = 0; i < angleButtons.size(); i++) {
 			final int index = i;
 			angleButtons.get(i).setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -139,7 +141,7 @@ public class BoatInclineView extends Activity {
 		finnKrengevinkelButton
 				.setOnClickListener(finnKrengevinkelButtonListener);
 	}
-	
+
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
 		public void onClick(View v) {
 			startCamera();
@@ -153,16 +155,29 @@ public class BoatInclineView extends Activity {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
 				Toast.makeText(getApplicationContext(),
 						TAG + " bildet er lagret", Toast.LENGTH_LONG).show();
-				addAngle(Math.random());
+//				addAngle(tTFLine
+//						.findAngle(Bitmap.createScaledBitmap(bitmap,
+//								bitmap.getWidth() / 10,
+//								bitmap.getHeight() / 10, false)));
 			} else {
 				logm("Taking picture failed. Try again!");
 			}
 		}
 	}
-	
-	private void addAngle(Double angle){
+
+	private void addAngle(Double angle) {
+		if (angle == 999) {
+			Toast.makeText(getApplicationContext(), "MagicLine!",
+					Toast.LENGTH_SHORT).show();
+			angle = Math.random();
+		}
 		int angleIndex = angleLineView.setAngle(angle);
-		angleButtons.get(angleIndex).setVisibility(0);		
+		if (angleIndex > 2) {
+			((Button) findViewById(id.finnKrengeVinkel_Result))
+					.setEnabled(false);
+		}
+		angleButtons.get(angleIndex).setVisibility(0);
+
 	}
 
 	// andoird menu

@@ -85,6 +85,7 @@ public class DrawingBoatLines extends View {
 
 	public void drawR(Canvas canvas, int angleToDraw) {
 		gridBottom = getBottom() - getHeight() % cellWidth;
+		
 		// draw grid
 		for (int i = 0; i <= getWidth(); i += cellWidth) {
 			canvas.drawLine(i, getTop(), i, gridBottom, black);
@@ -119,11 +120,9 @@ public class DrawingBoatLines extends View {
 						    0F,0F,1F};
 		
 		matrix.setValues(points);
-		Toast.makeText(getContext(),
-				matrix.toString(), Toast.LENGTH_LONG).show();
+//		Toast.makeText(getContext(),
+//				matrix.toString(), Toast.LENGTH_LONG).show();
 		canvas.drawBitmap(boat, matrix, null);
-
-		// TODO Draw boat
 
 		// draw axes
 		float yAxes = getXAxes();
