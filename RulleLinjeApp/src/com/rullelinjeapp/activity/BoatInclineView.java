@@ -158,7 +158,12 @@ public class BoatInclineView extends Activity {
 	
 	private void addAngle(Double angle){
 		int angleIndex = angleLineView.setAngle(angle);
-		angleButtons.get(angleIndex).setVisibility(0);		
+		if (angleIndex >2){
+			((Button) findViewById(id.finnKrengeVinkel_Result)).setEnabled(false);
+		}
+			angleButtons.get(angleIndex).setVisibility(0);	
+		
+		
 	}
 
 	// andoird menu
