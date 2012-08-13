@@ -23,11 +23,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rullelinjeapp.R;
 import com.rullelinjeapp.R.id;
 import com.rullelinjeapp.customviews.DrawingBoatLines;
+import com.rullelinjeapp.util.TTFLine;
 
 public class BoatInclineView extends Activity {
 	final static private String TAG = "##### BoatInclineView";
@@ -42,7 +44,9 @@ public class BoatInclineView extends Activity {
 	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
 	DrawingBoatLines angleLineView;
-	ArrayList<Button> angleButtons;
+	ArrayList<ImageButton> angleButtons;
+	TTFLine tTFLine;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,11 +122,11 @@ public class BoatInclineView extends Activity {
 	}
 
 	private void setUpButtons() {
-		angleButtons = new ArrayList<Button>();
-		angleButtons.add((Button) findViewById(id.boat1));
-		angleButtons.add((Button) findViewById(id.boat2));
-		angleButtons.add((Button) findViewById(id.boat3));
-		angleButtons.add((Button) findViewById(id.boat4));
+		angleButtons = new ArrayList<ImageButton>();
+		angleButtons.add((ImageButton) findViewById(id.boat1));
+		angleButtons.add((ImageButton) findViewById(id.boat2));
+		angleButtons.add((ImageButton) findViewById(id.boat3));
+		angleButtons.add((ImageButton) findViewById(id.boat4));
 		for (int i=0; i<angleButtons.size() ;i++){
 			final int index = i;
 			angleButtons.get(i).setOnClickListener(new OnClickListener() {
