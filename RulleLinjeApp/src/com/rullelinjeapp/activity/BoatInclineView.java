@@ -137,9 +137,15 @@ public class BoatInclineView extends Activity {
 				}
 			});
 		}
-		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengeVinkel_Result);
-		finnKrengevinkelButton
+		((Button) findViewById(R.id.finnKrengeVinkel_Result))
 				.setOnClickListener(finnKrengevinkelButtonListener);
+		((Button) findViewById(id.save_image_Result)).setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+					saveAllAngleLines();
+			}
+		});
+		
 	}
 
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
