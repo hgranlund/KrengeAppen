@@ -160,8 +160,6 @@ public class BoatInclineView extends Activity {
 			logm("Camera onActivityResult!");
 			if (resultCode == Activity.RESULT_OK) {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-				Toast.makeText(getApplicationContext(),
-						TAG + " bildet er lagret", Toast.LENGTH_LONG).show();
 				addAngle(tTFLine
 						.calculateYaw(Bitmap.createScaledBitmap(bitmap,
 								bitmap.getWidth() / 10,
@@ -174,9 +172,9 @@ public class BoatInclineView extends Activity {
 	//TODO send bilde by email
 	private void addAngle(Double angle) {
 		if (angle == 999) {
-			Toast.makeText(getApplicationContext(), "MagicLine!",
-					Toast.LENGTH_SHORT).show();
-			angle = Math.random();
+			Toast.makeText(getApplicationContext(), "Fant ikke vinkel. Prøv på nytt.",
+					Toast.LENGTH_LONG).show();
+//			angle = Math.random()*(Math.PI/2);
 		}
 		int angleIndex = angleLineView.setAngle(angle);
 		if (angleIndex > 2) {

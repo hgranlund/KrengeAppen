@@ -35,10 +35,11 @@ public class TTFLine {
 		lines = lineDetector.reduceCandidates(lines);
 		
 		if (lines.size() <= 0) {
-			return Math.random()*(Math.PI/2);
+			return 999;
 		} else if (lines.size() == 1) {
-			int[] horizontal = {0, 0, 10, 0};
-			return lineDetector.innerAngle(lines.get(0), horizontal);
+//			int[] horizontal = {0, 0, 10, 0};
+//			return lineDetector.innerAngle(lines.get(0), horizontal);
+			return 999;
 		} 
 		
 		return lineDetector.innerAngle(lines.get(0), lines.get(1));
