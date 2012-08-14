@@ -132,7 +132,7 @@ public class DrawingBoatLines extends View {
 				cos,
 				-sin,
 				getXAxes() - ((boat.getWidth() / 2) * cos)
-						- ((boat.getHeight() / 2) * sin),
+						+ ((boat.getHeight() / 2) * sin),
 				sin,
 				cos,
 				getYAxes() - ((boat.getWidth() / 2) * sin)
