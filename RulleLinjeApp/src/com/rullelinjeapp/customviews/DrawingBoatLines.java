@@ -23,12 +23,16 @@ public class DrawingBoatLines extends View {
 		Log.i(TAG, line);
 	}
 
-	Paint blue = new Paint();
-	Paint black = new Paint();
-	Paint cyan = new Paint();
 	Paint green = new Paint();
-	Paint yellow = new Paint();
-	Paint[] paints = { blue, cyan, green, yellow };
+	Paint black = new Paint();
+	Paint lightred = new Paint();
+	Paint orange = new Paint();
+	Paint purple = new Paint();
+	Paint[] paints = { green, lightred, orange, purple };
+	int[] drawables = { R.drawable.inclineboat72p_green_0f8000,
+			R.drawable.inclineboat72p_lightred_f03932,
+			R.drawable.inclineboat72p_orange_fc9700,
+			R.drawable.inclineboat72p_purple_8e2abf };
 	int cellWidth;
 	int gridBottom;
 	int selectedAngleIndex;
@@ -45,9 +49,9 @@ public class DrawingBoatLines extends View {
 		this.invalidate();
 		return selectedAngleIndex;
 	}
-	
-	public void setSelectedIndex(int index){
-		selectedAngleIndex=index;
+
+	public void setSelectedIndex(int index) {
+		selectedAngleIndex = index;
 		this.invalidate();
 	}
 
@@ -58,11 +62,11 @@ public class DrawingBoatLines extends View {
 
 	private void pupulateVariables() {
 		cellWidth = 30;
-		blue.setColor(Color.BLUE);
+		green.setARGB(255, 15, 128, 0);
 		black.setColor(Color.BLACK);
-		cyan.setColor(Color.CYAN);
-		green.setColor(Color.GREEN);
-		yellow.setColor(Color.YELLOW);
+		lightred.setARGB(255, 240, 57, 50);
+		orange.setARGB(255, 252, 151, 0);
+		purple.setARGB(255, 142, 42, 191);
 		selectedAngleIndex = 0;
 	}
 
@@ -85,7 +89,7 @@ public class DrawingBoatLines extends View {
 
 	public void drawR(Canvas canvas, int angleToDraw) {
 		gridBottom = getBottom() - getHeight() % cellWidth;
-		
+
 		// draw grid
 		for (int i = 0; i <= getWidth(); i += cellWidth) {
 			canvas.drawLine(i, getTop(), i, gridBottom, black);
@@ -94,6 +98,15 @@ public class DrawingBoatLines extends View {
 			canvas.drawLine(0, i, getWidth(), i, black);
 		}
 
+		// draw axes
+		float yAxes = getXAxes();
+		canvas.drawRect(yAxes - 2, getTop(), yAxes + 2, gridBottom, black);
+		float xAxes = getYAxes();
+		canvas.drawRect(0, xAxes - 2, getWidth(), xAxes + 2, black);
+
+		if (angles.size() < 1) {
+			return;
+		}
 		// draw angelLines
 		int lenPaints = paints.length;
 		if (angleToDraw == 999) {
@@ -110,25 +123,25 @@ public class DrawingBoatLines extends View {
 			paints[angleToDraw % lenPaints].setStrokeWidth(0);
 		}
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
-				R.drawable.ic_launcher);
+				drawables[selectedAngleIndex]);
 		Matrix matrix = new Matrix();
 		double rad = -angles.get(selectedAngleIndex);
 		float sin = (float) Math.sin(rad);
 		float cos = (float) Math.cos(rad);
-		float[] points =   {cos,-sin,getXAxes()-((boat.getWidth()/2)*cos),
-						    sin,cos,getYAxes()-((boat.getWidth()/2)*sin),
-						    0F,0F,1F};
-		
-		matrix.setValues(points);
-//		Toast.makeText(getContext(),
-//				matrix.toString(), Toast.LENGTH_LONG).show();
-		canvas.drawBitmap(boat, matrix, null);
+		float[] points = {
+				cos,
+				-sin,
+				getXAxes() - ((boat.getWidth() / 2) * cos)
+						- ((boat.getHeight() / 2) * sin),
+				sin,
+				cos,
+				getYAxes() - ((boat.getWidth() / 2) * sin)
+						- ((boat.getHeight() / 2) * cos)-3, 0F, 0F, 1F };
 
-		// draw axes
-		float yAxes = getXAxes();
-		canvas.drawRect(yAxes - 2, getTop(), yAxes + 2, gridBottom, black);
-		float xAxes = getYAxes();
-		canvas.drawRect(0, xAxes - 2, getWidth(), xAxes + 2, black);
+		matrix.setValues(points);
+		// Toast.makeText(getContext(),
+		// matrix.toString(), Toast.LENGTH_LONG).show();
+		canvas.drawBitmap(boat, matrix, null);
 	}
 
 	@Override

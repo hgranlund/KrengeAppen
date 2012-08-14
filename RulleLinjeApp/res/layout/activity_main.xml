@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/boat3" />
+        android:src="@drawable/main_icon" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
@@ -21,14 +21,14 @@
 
         <Button
             android:id="@+id/finnKrengevinkel"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Finn krengevinkel" />
 
         <Button
             android:id="@+id/instruksjon"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Instruksjoner" />
