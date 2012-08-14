@@ -12,7 +12,6 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.rullelinjeapp.R;
 
@@ -124,10 +123,10 @@ public class DrawingBoatLines extends View {
 			paints[angleToDraw % lenPaints].setStrokeWidth(0);
 			drawKrengeBoat(angleToDraw, canvas);
 		}
-		//TODO draw angle half circle
+		// TODO draw angle half circle
 	}
 
-	private void drawKrengeBoat(int angleIndex, Canvas canvas){
+	private void drawKrengeBoat(int angleIndex, Canvas canvas) {
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
 				drawables[angleIndex]);
 		Matrix matrix = new Matrix();
@@ -142,13 +141,14 @@ public class DrawingBoatLines extends View {
 				sin,
 				cos,
 				getYAxes() - ((boat.getWidth() / 2) * sin)
-						- ((boat.getHeight() / 2) * cos)-3, 0F, 0F, 1F };
+						- ((boat.getHeight() / 2) * cos) - 3, 0F, 0F, 1F };
 
 		matrix.setValues(points);
 		// Toast.makeText(getContext(),
 		// matrix.toString(), Toast.LENGTH_LONG).show();
 		canvas.drawBitmap(boat, matrix, null);
 	}
+
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);

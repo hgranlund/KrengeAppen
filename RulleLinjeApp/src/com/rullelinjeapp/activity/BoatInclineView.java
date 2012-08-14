@@ -39,7 +39,7 @@ public class BoatInclineView extends Activity {
 	}
 
 	final static String basePath = Environment.getExternalStorageDirectory()
-			.toString() + "/BoatApp";
+			.toString() + "/KrengeApp";
 	final static int ID_MENU_SAVE_CANVAS = 1;
 	final static String photoPath = basePath + "/temp_photo.jpg";
 	private static final int CAMERA_PIC_REQUEST = 1;
