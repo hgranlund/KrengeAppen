@@ -75,6 +75,7 @@ public class BoatInclineView extends Activity {
 		for (int i = 0; i < angleLineView.angles.size(); i++) {
 			saveCanvas(i);
 		}
+		Toast.makeText(getApplicationContext(), "Bildene er lagret i SD-kortet.", Toast.LENGTH_LONG).show();
 	}
 
 	private void saveCanvas(int boatNumber) {
@@ -170,7 +171,7 @@ public class BoatInclineView extends Activity {
 			}
 		}
 	}
-
+	//TODO send bilde by email
 	private void addAngle(Double angle) {
 		if (angle == 999) {
 			Toast.makeText(getApplicationContext(), "MagicLine!",

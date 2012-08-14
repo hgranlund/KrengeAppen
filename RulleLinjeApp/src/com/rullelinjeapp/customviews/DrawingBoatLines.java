@@ -116,16 +116,22 @@ public class DrawingBoatLines extends View {
 						% lenPaints]);
 			}
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(0);
+			drawKrengeBoat(selectedAngleIndex, canvas);
 		} else {
 			paints[angleToDraw % lenPaints].setStrokeWidth(5);
 			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)),
 					paints[angleToDraw % lenPaints]);
 			paints[angleToDraw % lenPaints].setStrokeWidth(0);
+			drawKrengeBoat(angleToDraw, canvas);
 		}
+		//TODO draw angle half circle
+	}
+
+	private void drawKrengeBoat(int angleIndex, Canvas canvas){
 		Bitmap boat = BitmapFactory.decodeResource(getResources(),
-				drawables[selectedAngleIndex]);
+				drawables[angleIndex]);
 		Matrix matrix = new Matrix();
-		double rad = -angles.get(selectedAngleIndex);
+		double rad = -angles.get(angleIndex);
 		float sin = (float) Math.sin(rad);
 		float cos = (float) Math.cos(rad);
 		float[] points = {
@@ -143,7 +149,6 @@ public class DrawingBoatLines extends View {
 		// matrix.toString(), Toast.LENGTH_LONG).show();
 		canvas.drawBitmap(boat, matrix, null);
 	}
-
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
