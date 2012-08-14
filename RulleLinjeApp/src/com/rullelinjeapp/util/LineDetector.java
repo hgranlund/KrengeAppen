@@ -24,7 +24,7 @@ public class LineDetector {
 			int[] edgePointFrom = { n, width - 1 };
 			candidateLines.addAll(getCandidatesForSide(edgePointFrom,
 					edgeArray, width, height, threshold, false, false, true,
-					true));	
+					true));
 		}
 
 		// bottom iteration
@@ -231,6 +231,28 @@ public class LineDetector {
 		}
 
 		return sum;
+	}
+	
+	public double innerAngle(int[] line1, int[] line2) {
+		int line1X1 = line1[0];
+		int line1Y1 = line1[1];
+		int line1X2 = line1[2];
+		int line1Y2 = line1[3];
+		int line2X1 = line2[0];
+		int line2Y1 = line2[1];
+		int line2X2 = line2[2];
+		int line2Y2 = line2[3];
+		float dx21 = line1X2-line1X1;
+		float dy21 = line1Y2-line1Y1;
+		float dx31 = line2X2-line2X1;
+		float dy31 = line2Y2-line2Y1;
+		double m12 = Math.sqrt( dx21*dx21 + dy21*dy21 );
+		double m13 = Math.sqrt( dx31*dx31 + dy31*dy31 );
+		double theta = Math.acos( (dx21*dx31 + dy21*dy31) / (m12 * m13) );
+		if (theta >= Math.PI/2) {
+			return Math.PI - theta;
+		}
+		return theta;
 	}
 
 }

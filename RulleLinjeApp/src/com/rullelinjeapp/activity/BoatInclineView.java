@@ -162,7 +162,7 @@ public class BoatInclineView extends Activity {
 				Toast.makeText(getApplicationContext(),
 						TAG + " bildet er lagret", Toast.LENGTH_LONG).show();
 				addAngle(tTFLine
-						.findAngle(Bitmap.createScaledBitmap(bitmap,
+						.calculateYaw(Bitmap.createScaledBitmap(bitmap,
 								bitmap.getWidth() / 10,
 								bitmap.getHeight() / 10, false)));
 			} else {
