@@ -3,6 +3,8 @@ package com.rullelinjeapp.util;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import android.util.FloatMath;
+
 public class LineDetector {
 
 	public ArrayList<int[]> getCandidateLines(int[][] edgeArray, int threshold) {
@@ -39,38 +41,42 @@ public class LineDetector {
 	}
 
 	public ArrayList<int[]> reduceCandidates(ArrayList<int[]> candidateLines) {
-		if (candidateLines.size() < 2) {
-			return candidateLines;
-		}
-		while (candidateLines.size() > 20) {
-			candidateLines = mergeLine(candidateLines);
-		}
-		while (candidateLines.size() > 2) {
-			candidateLines = mergeGroup(candidateLines);
-		}
-		return candidateLines;
-	}
-
-	public ArrayList<int[]> mergeGroup(ArrayList<int[]> candidateLines) {
-		int[] line1 = candidateLines.get(0);
-		int[] line2 = candidateLines.get(1);
-		int difference = getDifference(line1, line2);
-
-		for (int[] lineA : candidateLines) {
-			for (int[] lineB : candidateLines) {
-				if (lineA != lineB && difference >= getDifference(lineA, lineB)) {
-					difference = getDifference(lineA, lineB);
-					line1 = lineA;
-					line2 = lineB;
-				}
+		ArrayList<int[]> returnVal = new ArrayList<int[]>();
+		int treshold = 10;
+		
+		for (int[] line:candidateLines) {
+			int dx = Math.abs(line[0] - line[2]);
+			int dy = Math.abs(line[1] - line[3]);
+			if (dx > treshold && dy > treshold) {
+				returnVal.add(line);
 			}
 		}
-		candidateLines.remove(line1);
-		candidateLines.remove(line2);
-		candidateLines.add(mergeLines(line1, line2));
-		return candidateLines;
-
+		if (returnVal.size() <= 1) {
+			return returnVal;
+		}
+		return getTopCountLine(returnVal);
 	}
+
+//	public ArrayList<int[]> mergeGroup(ArrayList<int[]> candidateLines) {
+//		int[] line1 = candidateLines.get(0);
+//		int[] line2 = candidateLines.get(1);
+//		int difference = getDifference(line1, line2);
+//
+//		for (int[] lineA : candidateLines) {
+//			for (int[] lineB : candidateLines) {
+//				if (lineA != lineB && difference >= getDifference(lineA, lineB)) {
+//					difference = getDifference(lineA, lineB);
+//					line1 = lineA;
+//					line2 = lineB;
+//				}
+//			}
+//		}
+//		candidateLines.remove(line1);
+//		candidateLines.remove(line2);
+//		candidateLines.add(mergeLines(line1, line2));
+//		return candidateLines;
+//
+//	}
 
 	public int getDifference(int[] line1, int[] line2) {
 		return getPointDifference(line1[0], line1[1], line1[2], line1[3])
@@ -83,24 +89,25 @@ public class LineDetector {
 		return (int) (Math.pow(dx, 2.0) + Math.pow(dy, 2.0));
 	}
 
-	public int[] mergeLines(int[] line1, int[] line2) {
-		if (line1[4] > line2[4]) {
-			line1[4] += line2[4];
-			return line1;
-		}
-		line2[4] += line1[4];
-		return line2;
-	}
+//	public int[] mergeLines(int[] line1, int[] line2) {
+//		if (line1[4] > line2[4]) {
+//			line1[4] += line2[4];
+//			return line1;
+//		}
+//		line2[4] += line1[4];
+//		return line2;
+//	}
 
-	public ArrayList<int[]> mergeLine(ArrayList<int[]> candidateLines) {
+	public ArrayList<int[]> getTopCountLine(ArrayList<int[]> candidateLines) {
+		ArrayList<int[]> returnVal= new ArrayList<int[]>();
 		int[] mergeLine = candidateLines.get(0);
 		for (int[] line : candidateLines) {
-			if (line[4] < mergeLine[4]) {
+			if (line[4] > mergeLine[4]) {
 				mergeLine = line;
 			}
 		}
-		candidateLines.remove(mergeLine);
-		return candidateLines;
+		returnVal.add(mergeLine);
+		return returnVal;
 	}
 
 	public ArrayList<int[]> getCandidatesForSide(int[] edgePointFrom,
@@ -246,11 +253,14 @@ public class LineDetector {
 		float dy21 = line1Y2-line1Y1;
 		float dx31 = line2X2-line2X1;
 		float dy31 = line2Y2-line2Y1;
-		double m12 = Math.sqrt( dx21*dx21 + dy21*dy21 );
-		double m13 = Math.sqrt( dx31*dx31 + dy31*dy31 );
+		double m12 = FloatMath.sqrt( dx21*dx21 + dy21*dy21 );
+		double m13 = FloatMath.sqrt( dx31*dx31 + dy31*dy31 );
 		double theta = Math.acos( (dx21*dx31 + dy21*dy31) / (m12 * m13) );
 		if (theta >= Math.PI/2) {
-			return Math.PI - theta;
+			theta =  Math.PI - theta;
+		} 
+		if (theta >= Math.PI/4) {
+			theta = (Math.PI/2) - theta;
 		}
 		return theta;
 	}

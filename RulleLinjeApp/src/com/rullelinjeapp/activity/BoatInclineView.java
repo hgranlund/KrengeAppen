@@ -162,8 +162,9 @@ public class BoatInclineView extends Activity {
 				Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
 				addAngle(tTFLine
 						.calculateYaw(Bitmap.createScaledBitmap(bitmap,
-								bitmap.getWidth() / 10,
-								bitmap.getHeight() / 10, false)));
+								bitmap.getWidth() / 2,
+								bitmap.getHeight() / 2, false)));
+//				addAngle(tTFLine.calculateYaw(bitmap));
 			} else {
 				logm("Taking picture failed. Try again!");
 			}

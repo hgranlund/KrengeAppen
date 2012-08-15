@@ -35,14 +35,18 @@ public class TTFLine {
 		lines = lineDetector.reduceCandidates(lines);
 		
 		if (lines.size() <= 0) {
-			return 999;
-		} else if (lines.size() == 1) {
-//			int[] horizontal = {0, 0, 10, 0};
-//			return lineDetector.innerAngle(lines.get(0), horizontal);
-			return 999;
+			return 0.0;
 		} 
+//		else if (lines.size() == 1) {
+////			int[] horizontal = {0, 0, 10, 0};
+////			return lineDetector.innerAngle(lines.get(0), horizontal);
+//			return 999;
+//		} 
+//		
+//		return lineDetector.innerAngle(lines.get(0), lines.get(1));
 		
-		return lineDetector.innerAngle(lines.get(0), lines.get(1));
+		int[] vertical = {0, 0, 0, 100};
+		return lineDetector.innerAngle(lines.get(0), vertical);
 	}
 	
 	public int luminanceFromARGB(int rgb) {
