@@ -1,3 +1,4 @@
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -11,27 +12,32 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/main_icon" />
 
+
+
+
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="46dp"
-        android:orientation="vertical" >
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal" >
+
 
         <Button
             android:id="@+id/finnKrengevinkel"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:text="Finn krengevinkel" />
 
         <Button
             android:id="@+id/instruksjon"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:text="Instruksjoner" />
+
     </LinearLayout>
 
 </RelativeLayout>
