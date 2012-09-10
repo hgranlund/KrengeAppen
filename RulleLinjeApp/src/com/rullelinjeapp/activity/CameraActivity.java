@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -59,6 +60,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
+		
 		// TODO Auto-generated method stub
 
 	}
@@ -69,6 +71,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 			try {
 				camera.setPreviewDisplay(surfaceHolder);
 				camera.startPreview();
+				Parameters p = camera.getParameters();
+				 p.set("orientation", "portrait");
+				 p.set("rotation", 90);
+				 camera.setParameters(p);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

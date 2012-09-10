@@ -1,19 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
+	
+     <SurfaceView
+        android:id="@+id/surfaceview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
 
-
-    <com.rullelinjeapp.customviews.CameraLineView
+<!--     <com.rullelinjeapp.customviews.CameraLineView
         android:id="@+id/cameraLineView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
- 
-    <SurfaceView
-        android:id="@+id/surfaceview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
+  -->
+   
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="100dp"
