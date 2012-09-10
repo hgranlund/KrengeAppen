@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <com.rullelinjeapp.customviews.CameraLineView
+        android:id="@+id/cameraLineView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+ 
+    <SurfaceView
+        android:id="@+id/surfaceview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/finnKrengeVinkel_Result"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:text="Finn krengevinkel" />
+    </LinearLayout>
+
+</RelativeLayout>

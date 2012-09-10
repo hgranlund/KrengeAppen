@@ -43,10 +43,10 @@ public class MainActivity extends Activity {
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
 		public void onClick(View v) {
 			logm("clicked krengebutton.");
-			Intent ResultIntent = new Intent(MainActivity.this,
+			Intent boatInclineIntent  = new Intent(MainActivity.this,
 					BoatInclineView.class);
-			ResultIntent.putExtra("angle", Math.random());
-			MainActivity.this.startActivity(ResultIntent);
+			boatInclineIntent.putExtra("Class123", "MainActiviy");
+			MainActivity.this.startActivity(boatInclineIntent);
 		}
 	};
 
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		dialog.setContentView(R.layout.dialog_instruksjoner);
 		dialog.setTitle("Instruksjoner");
 
-		TextView text = (TextView) dialog.findViewById(R.id.text);
+		TextView text = (TextView) dialog.findViewById(R.id.dialog_text);
 		text.setText(R.string.instruksjoner_hovedside);
 
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
