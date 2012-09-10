@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -26,7 +28,6 @@ import android.widget.Toast;
 import com.rullelinjeapp.R;
 import com.rullelinjeapp.R.id;
 import com.rullelinjeapp.customviews.DrawingBoatLines;
-import com.rullelinjeapp.util.TTFLine;
 
 public class BoatInclineView extends Activity {
 	final static private String TAG = "##### BoatInclineView";
@@ -40,11 +41,10 @@ public class BoatInclineView extends Activity {
 	final static int ID_MENU_SAVE_CANVAS = 1;
 	final static int KRENGE_VINKEL_RESULT = 2;
 	final static String photoPath = basePath + "/temp_photo.jpg";
-	private static final int CAMERA_PIC_REQUEST = 1;
 
 	DrawingBoatLines angleLineView;
 	ArrayList<ImageButton> angleButtons;
-	TTFLine tTFLine;
+	private HashSet<Uri> filePaths = new HashSet<Uri>(4);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,12 +61,11 @@ public class BoatInclineView extends Activity {
 			}
 			baseFile.mkdirs();
 		}
-		
+
 		startCamera();
-		
+
 		setUpButtons();
 		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
-		tTFLine = new TTFLine();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 	}
@@ -83,6 +82,7 @@ public class BoatInclineView extends Activity {
 		FileOutputStream fileOutPut = null;
 		File file = new File(basePath + File.separator + "BaatNummer"
 				+ (boatNumber + 1) + ".jpg");
+		filePaths.add(Uri.fromFile(file));
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
@@ -107,11 +107,39 @@ public class BoatInclineView extends Activity {
 		}
 	}
 
+	protected void sendResultEmail() {
+		for (int i = 0; i < angleLineView.angles.size(); i++) {
+			saveCanvas(i);
+		}
+		try {
+			Intent emailIntent = new Intent(
+					android.content.Intent.ACTION_SEND_MULTIPLE);
+
+			String address = "";
+			String subject = "Resultater fra KrengeAppen";
+			String emailtext = "Resultatene er vedlagt som bilder.";
+
+			emailIntent.setType("plain/text");
+			emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+					new String[] { address });
+			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailtext);
+
+			ArrayList<Uri> uris = new ArrayList<Uri>(filePaths);
+			emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+
+			this.startActivity(Intent
+					.createChooser(emailIntent, "Send mail..."));
+
+		} catch (Throwable t) {
+			Toast.makeText(this, "Kunne dessverre ikke sende mail. Beklager!",
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
 	private void startCamera() {
-		Intent CameraIntent = new Intent(this,
-				CameraActivity.class);
-		this.startActivityForResult(CameraIntent,
-				KRENGE_VINKEL_RESULT);
+		Intent CameraIntent = new Intent(this, CameraActivity.class);
+		this.startActivityForResult(CameraIntent, KRENGE_VINKEL_RESULT);
 	}
 
 	private void setUpButtons() {
@@ -130,11 +158,16 @@ public class BoatInclineView extends Activity {
 		}
 		((Button) findViewById(R.id.finnKrengeVinkel_Result))
 				.setOnClickListener(finnKrengevinkelButtonListener);
-		((Button) findViewById(id.save_image_Result))
+		((Button) findViewById(R.id.save_image_Result))
 				.setOnClickListener(new OnClickListener() {
-
 					public void onClick(View v) {
 						saveAllAngleLines();
+					}
+				});
+		((Button) findViewById(R.id.send_image_Result))
+				.setOnClickListener(new OnClickListener() {
+					public void onClick(View v) {
+						sendResultEmail();
 					}
 				});
 
@@ -155,11 +188,10 @@ public class BoatInclineView extends Activity {
 		}
 	}
 
-	// TODO send bilde by email
 	private void addAngle(Double angle) {
 		if (angle == 999) {
 			Toast.makeText(getApplicationContext(),
-					"Fant ikke vinkel. Prøv på nytt.", Toast.LENGTH_LONG)
+					"Fant ikke vinkel. Prï¿½v pï¿½ nytt.", Toast.LENGTH_LONG)
 					.show();
 			// angle = Math.random()*(Math.PI/2);
 		}

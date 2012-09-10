@@ -76,7 +76,7 @@
             android:text="Lagre bilder" />
 
         <Button
-            android:id="@+id/save_image_Result"
+            android:id="@+id/send_image_Result"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="3"
