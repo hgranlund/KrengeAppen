@@ -69,19 +69,19 @@ public class DrawingBoatLines extends View {
 		selectedAngleIndex = 0;
 	}
 
-	private int getYAxes() {
+	private int getXAxes() {
 		int numberOfLines = getHeight() / cellWidth;
 		return (int) (numberOfLines * 2.0 / 3.0 * cellWidth);
 	}
 
-	private int getXAxes() {
+	private int getYAxes() {
 		int numberOfLines = getWidth() / cellWidth;
 		return (int) (numberOfLines / 2.0 * cellWidth);
 	}
 
 	private float[] getPointsFromAngle(double angle) {
 		float kat = (float) Math.tan(angle) * getWidth() / 2;
-		float[] points = { 0, Math.max(getYAxes() + kat, (float) getTop()),
+		float[] points = { 0, Math.max(getXAxes() + kat, (float) getTop()),
 				getWidth(), Math.min(getYAxes() - kat, (float) gridBottom) };
 		return points;
 	}
@@ -98,9 +98,9 @@ public class DrawingBoatLines extends View {
 		}
 
 		// draw axes
-		float yAxes = getXAxes();
+		float yAxes = getYAxes();
 		canvas.drawRect(yAxes - 2, getTop(), yAxes + 2, gridBottom, black);
-		float xAxes = getYAxes();
+		float xAxes = getXAxes();
 		canvas.drawRect(0, xAxes - 2, getWidth(), xAxes + 2, black);
 
 		if (angles.size() < 1) {
@@ -136,11 +136,11 @@ public class DrawingBoatLines extends View {
 		float[] points = {
 				cos,
 				-sin,
-				getXAxes() - ((boat.getWidth() / 2) * cos)
+				getYAxes() - ((boat.getWidth() / 2) * cos)
 						+ ((boat.getHeight() / 2) * sin),
 				sin,
 				cos,
-				getYAxes() - ((boat.getWidth() / 2) * sin)
+				getXAxes() - ((boat.getWidth() / 2) * sin)
 						- ((boat.getHeight() / 2) * cos) - 3, 0F, 0F, 1F };
 
 		matrix.setValues(points);

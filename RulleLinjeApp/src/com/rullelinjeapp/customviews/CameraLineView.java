@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.PopupWindow;
 
 public class CameraLineView extends View {
 	final static private String TAG = "##### DrawingBoatLines";
@@ -21,8 +22,7 @@ public class CameraLineView extends View {
 
 	public CameraLineView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		cellWidth = 30;
-		gridBottom = getBottom() - getHeight() % cellWidth;
+		pupulateVariables();
 	}
 
 	public CameraLineView(Context context) {
@@ -32,11 +32,14 @@ public class CameraLineView extends View {
 
 	private void pupulateVariables() {
 		red.setColor(Color.RED);
+		cellWidth = 30;
+		gridBottom = getBottom() - getHeight() % cellWidth;
 	}
 
+	
 	private int getXAxes() {
-		int numberOfLines = getWidth() / cellWidth;
-		return (int) (numberOfLines / 2.0 * cellWidth);
+		int numberOfLines = getHeight() / cellWidth;
+		return (int) (numberOfLines * 2.0 / 3.0 * cellWidth);
 	}
 
 
@@ -44,8 +47,9 @@ public class CameraLineView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		float xAxes = getXAxes();
-		red.setStrokeWidth(5);
-		canvas.drawRect(xAxes - 2, getTop(), xAxes + 2, gridBottom, red);
+		red.setColor(Color.RED);
+		red.setStrokeWidth(8);
+		canvas.drawLine(0+25,xAxes,getWidth()-25, xAxes, red);
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
 				+ " myBottom: " + gridBottom);
