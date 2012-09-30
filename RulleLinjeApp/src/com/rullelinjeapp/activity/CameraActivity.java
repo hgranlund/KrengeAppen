@@ -22,16 +22,20 @@ import android.widget.Button;
 
 import com.rullelinjeapp.R;
 
-public class CameraActivity extends Activity implements SurfaceHolder.Callback,
-		SensorEventListener {
+public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
 	Camera mCamera;
 	SurfaceView mSurfaceView;
 	SurfaceHolder surfaceHolder;
-	float lastXAccelero = 0;
+
 	boolean isPreviewRunning = false;
-	private SensorManager mSensorManager;
-	private Sensor mAccelerometer;
+	final float[] mValuesMagnet = new float[3];
+	final float[] mValuesAccel = new float[3];
+	final float[] mValuesOrientation = new float[3];
+	final float[] mRotationMatrix = new float[9];
+	SensorManager sensorManager;
+	SensorEventListener mEventListener;
+	
 	
 	final static private String TAG = "##### CameraActivity";
 
@@ -49,9 +53,26 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
 		surfaceHolder = mSurfaceView.getHolder();
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		mAccelerometer = mSensorManager
-				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+		mEventListener = new SensorEventListener() {
+			public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			}
+
+			public void onSensorChanged(SensorEvent event) {
+				switch (event.sensor.getType()) {
+				case Sensor.TYPE_ACCELEROMETER:
+					System.arraycopy(event.values, 0, mValuesAccel, 0, 3);
+					break;
+
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					System.arraycopy(event.values, 0, mValuesMagnet, 0, 3);
+					break;
+				}
+			};
+		};
+
+		setSensorListners();
+
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		finnKrengevinkelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -62,14 +83,14 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
 
 	}
 
-
 	private void findAnlge() {
-		double angle = (Double) (lastXAccelero/2
-				* Math.PI/10);
-		logm("found angle: "+ angle); 
+		SensorManager.getRotationMatrix(mRotationMatrix, null, mValuesAccel,
+				mValuesMagnet);
+		SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
+		double angle = (Math.PI / 2) - Math.abs(mValuesOrientation[1]);
+		logm("found angle: " + angle * (180 / Math.PI) + "grader");
 		Intent resultIntent = new Intent();
-				resultIntent.putExtra("angle", angle);
-		// TODO Add extras or a data URI to this intent as appropriate.
+		resultIntent.putExtra("angle", angle);
 		setResult(Activity.RESULT_OK, resultIntent);
 		releaseCamera();
 		finish();
@@ -138,32 +159,28 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback,
 		}
 	}
 
+	public void setSensorListners() {
+		sensorManager.registerListener(mEventListener,
+				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_NORMAL);
+		sensorManager.registerListener(mEventListener,
+				sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
+				SensorManager.SENSOR_DELAY_NORMAL);
+	}
+
+	public void removeSensorListners() {
+		sensorManager.unregisterListener(mEventListener);
+	}
+
 	protected void onResume() {
 		super.onResume();
-		mSensorManager.registerListener(this, mAccelerometer,
-				SensorManager.SENSOR_DELAY_NORMAL);
+		setSensorListners();
 	}
 
 	protected void onPause() {
 		super.onPause();
-		mSensorManager.unregisterListener(this);
-	}
+		removeSensorListners();
 
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-	}
-
-	public void onSensorChanged(SensorEvent event) {
-
-		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-			lastXAccelero = event.values[0];
-
-			// ay=event.values[1];
-
-			// az=event.values[2];
-			// logm("xAksen: " + event.values[0] + "/n" + " yAksen: "
-			// + event.values[1] + "/n" + " zAkses: " + event.values[2]);
-
-		}
 	}
 
 }
