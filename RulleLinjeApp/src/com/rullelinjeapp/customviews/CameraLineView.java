@@ -49,7 +49,8 @@ public class CameraLineView extends View {
 		float xAxes = getXAxes();
 		red.setColor(Color.RED);
 		red.setStrokeWidth(8);
-		canvas.drawLine(0+25,xAxes,getWidth()-25, xAxes, red);
+		int lineOffset= getWidth()/8;
+		canvas.drawLine(0+lineOffset,xAxes,getWidth()-lineOffset, xAxes, red);
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
 				+ " myBottom: " + gridBottom);

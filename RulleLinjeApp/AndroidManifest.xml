@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".activity.BoatInclineView" >
         </activity>
-        <activity android:name=".activity.CameraActivity" >
+        <activity android:name=".activity.CameraActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>
 

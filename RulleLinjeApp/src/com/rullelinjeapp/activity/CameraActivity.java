@@ -6,6 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -18,12 +22,17 @@ import android.widget.Button;
 
 import com.rullelinjeapp.R;
 
-public class CameraActivity extends Activity implements SurfaceHolder.Callback {
+public class CameraActivity extends Activity implements SurfaceHolder.Callback,
+		SensorEventListener {
 
 	Camera mCamera;
-	SurfaceView surfaceView;
+	SurfaceView mSurfaceView;
 	SurfaceHolder surfaceHolder;
+	float lastXAccelero = 0;
 	boolean isPreviewRunning = false;
+	private SensorManager mSensorManager;
+	private Sensor mAccelerometer;
+	
 	final static private String TAG = "##### CameraActivity";
 
 	public void logm(String line) {
@@ -36,10 +45,13 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		setContentView(R.layout.camera_layout);
 		Button finnKrengevinkelButton = (Button) findViewById(R.id.finnKrengeVinkel_Result);
 		getWindow().setFormat(PixelFormat.UNKNOWN);
-		surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
-		surfaceHolder = surfaceView.getHolder();
+		mSurfaceView = (SurfaceView) findViewById(R.id.surfaceview);
+		surfaceHolder = mSurfaceView.getHolder();
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		finnKrengevinkelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -50,10 +62,13 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
 	}
 
-	private void findAnlge() {
 
+	private void findAnlge() {
+		double angle = (Double) (lastXAccelero/2
+				* Math.PI/10);
+		logm("found angle: "+ angle); 
 		Intent resultIntent = new Intent();
-		resultIntent.putExtra("angle", Math.random());
+				resultIntent.putExtra("angle", angle);
 		// TODO Add extras or a data URI to this intent as appropriate.
 		setResult(Activity.RESULT_OK, resultIntent);
 		releaseCamera();
@@ -92,7 +107,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		previewCamera();
 	}
 
-	
 	public void previewCamera() {
 		try {
 			mCamera.setPreviewDisplay(surfaceHolder);
@@ -120,7 +134,36 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 			mCamera.stopPreview();
 			mCamera.release();
 			mCamera = null;
-			isPreviewRunning=false;
+			isPreviewRunning = false;
 		}
 	}
+
+	protected void onResume() {
+		super.onResume();
+		mSensorManager.registerListener(this, mAccelerometer,
+				SensorManager.SENSOR_DELAY_NORMAL);
+	}
+
+	protected void onPause() {
+		super.onPause();
+		mSensorManager.unregisterListener(this);
+	}
+
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+
+	public void onSensorChanged(SensorEvent event) {
+
+		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+			lastXAccelero = event.values[0];
+
+			// ay=event.values[1];
+
+			// az=event.values[2];
+			// logm("xAksen: " + event.values[0] + "/n" + " yAksen: "
+			// + event.values[1] + "/n" + " zAkses: " + event.values[2]);
+
+		}
+	}
+
 }

@@ -82,7 +82,7 @@ public class DrawingBoatLines extends View {
 	private float[] getPointsFromAngle(double angle) {
 		float kat = (float) Math.tan(angle) * getWidth() / 2;
 		float[] points = { 0, Math.max(getXAxes() + kat, (float) getTop()),
-				getWidth(), Math.min(getYAxes() - kat, (float) gridBottom) };
+				getWidth(), Math.min(getXAxes() - kat, (float) gridBottom) };
 		return points;
 	}
 
