@@ -1,43 +1,52 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/blue" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/MainHeddingText"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/main_icon" />
-
-
-
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:text="KrengeAppen" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="175dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:orientation="horizontal" >
-
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/finnKrengevinkel"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Finn krengevinkel" />
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/blue_btn"
+            android:text="Finn Krengevinkel" />
 
         <Button
             android:id="@+id/instruksjon"
-            android:layout_width="0dp"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="1"
+            android:background="@drawable/blue_btn"
             android:text="Instruksjoner" />
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:src="@drawable/mainicon" />
 
 </RelativeLayout>

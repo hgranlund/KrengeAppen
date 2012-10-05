@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 	private OnClickListener finnKrengevinkelButtonListener = new OnClickListener() {
 		public void onClick(View v) {
 			logm("clicked krengebutton.");
-			Intent boatInclineIntent  = new Intent(MainActivity.this,
+			Intent boatInclineIntent = new Intent(MainActivity.this,
 					BoatInclineView.class);
 			boatInclineIntent.putExtra("Class123", "MainActiviy");
 			MainActivity.this.startActivity(boatInclineIntent);

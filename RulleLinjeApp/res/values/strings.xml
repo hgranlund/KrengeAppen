@@ -1,10 +1,18 @@
 <resources>
+
     <string name="app_name">KrengeApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_save_all_lines">Lagre krengevinkler</string>
     <string name="title_activity_main">KrengeApp</string>
     <string name="title_activity_result">Resultat</string>
-	<string name="instruksjoner_hovedside">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales consequat erat, at ornare augue sodales at. Duis euismod lorem at magna euismod lacinia. Mauris interdum placerat diam quis vestibulum. Integer pellentesque porttitor augue, eget imperdiet nibh lobortis at. Duis a lorem vel libero accumsan posuere a eu turpis. Curabitur feugiat accumsan quam, ut condimentum elit euismod nec. Aliquam erat volutpat. Sed egestas mollis porta. Aenean tristique nibh ut mi congue vitae rutrum lacus tempus. Praesent elementum libero in quam varius porta.</string>
-	<color name="blue">#005ba6</color>
-	<color name= "light_blue">#EDEFF4</color>
+    <string name="instruksjoner_kamera">Hold telefonen opp mot karet med båten i og drei telefonen til den røde stripen stemmer overens med ripa (toppkanten) av båten. Trykk så på «Finn krengevinkel».</string>
+    <string name="instruksjoner_hovedside">KrengeApp er en applikasjon som lar deg plotte krengningen til en båt. For å komme i gang trykker du på knappen «Finn krengevinkel». Dette tar deg til en side hvor du kan bruke kameraet på mobiltelefonen til å finne krengningen til båten. Se instruksjonene på denne siden for en mer detaljert beskrivelse av hvordan dette gjøres.\n\n
+
+Når du har funnet krengningen, vil du bli tatt med til en side hvor du kan se resultatet tegnet opp i et rutenett. På denne siden kan du også velge å finne flere krengevinkler, lagre resultatene dine på mobiltelefonen eller sende resultatene til din egen mail.\n\n
+
+Lek med KrengeAppen! Du kan for eksempel finne krengningen til flere båter og sammenligne dem, eller se om du kan finne krengningen til andre ting enn båter.</string>
+
+    <color name="blue">#005ba6</color>
+    <color name="light_blue">#EDEFF4</color>
+
 </resources>

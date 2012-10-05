@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <com.rullelinjeapp.customviews.DrawingBoatLines
@@ -63,24 +64,36 @@
 
         <Button
             android:id="@+id/finnKrengeVinkel_Result"
+            style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="3"
-            android:text="Finn ny krengevinkel" />
+            android:background="@drawable/blue_btn"
+            android:text="Finn ny krengevinkel"
+            android:textSize="12dp" />
 
         <Button
             android:id="@+id/save_image_Result"
+            style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="3"
-            android:text="Lagre bilder" />
+            android:background="@drawable/blue_btn"
+            android:text="Lagre bilder"
+            android:textSize="12dp" />
 
         <Button
             android:id="@+id/send_image_Result"
+            style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="3"
-            android:text="Send bilder" />
+            android:background="@drawable/blue_btn"
+            android:text="Send bilder"
+            android:textSize="12dp" />
     </LinearLayout>
 
 </RelativeLayout>

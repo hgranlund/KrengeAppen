@@ -1,6 +1,8 @@
 package com.rullelinjeapp.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -17,6 +19,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -27,6 +30,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 	Camera mCamera;
 	SurfaceView mSurfaceView;
 	SurfaceHolder surfaceHolder;
+	final Context context = this;
 
 	boolean isPreviewRunning = false;
 	final float[] mValuesMagnet = new float[3];
@@ -35,8 +39,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 	final float[] mRotationMatrix = new float[9];
 	SensorManager sensorManager;
 	SensorEventListener mEventListener;
-	
-	
+
 	final static private String TAG = "##### CameraActivity";
 
 	public void logm(String line) {
@@ -54,6 +57,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+		setUpDialog();
 		mEventListener = new SensorEventListener() {
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			}
@@ -77,7 +81,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		finnKrengevinkelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				findAnlge();
-
 			}
 		});
 
@@ -87,6 +90,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		SensorManager.getRotationMatrix(mRotationMatrix, null, mValuesAccel,
 				mValuesMagnet);
 		SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
+		float angleTemp = mValuesOrientation[1];
 		double angle = (Math.PI / 2) - Math.abs(mValuesOrientation[1]);
 		logm("found angle: " + angle * (180 / Math.PI) + "grader");
 		Intent resultIntent = new Intent();
@@ -181,6 +185,27 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		super.onPause();
 		removeSensorListners();
 
+	}
+
+	private void setUpDialog() {
+		final Dialog dialog = new Dialog(context);
+		dialog.setContentView(R.layout.dialog_instruksjoner_camera);
+		dialog.setTitle("Instruksjoner");
+
+		Button dialogButton = (Button) dialog.findViewById(R.id.dialogKameraButtonOK);
+		dialogButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		Button instruksjonButton = (Button) findViewById(R.id.finnKrengeVinkel_info);
+		instruksjonButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				dialog.show();
+			}
+		});
 	}
 
 }

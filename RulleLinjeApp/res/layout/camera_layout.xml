@@ -2,14 +2,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-     <SurfaceView
+    <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="fill_parent"
-        android:keepScreenOn="true"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:keepScreenOn="true" />
 
-
-     <com.rullelinjeapp.customviews.CameraLineView
+    <com.rullelinjeapp.customviews.CameraLineView
         android:id="@+id/cameraLineView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
@@ -22,12 +21,15 @@
 
         <Button
             android:id="@+id/finnKrengeVinkel_info"
+            style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="1"
+            android:background="@drawable/blue_btn"
             android:text="Instruksjoner" />
     </LinearLayout>
-     
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="100dp"
@@ -36,9 +38,12 @@
 
         <Button
             android:id="@+id/finnKrengeVinkel_Result"
+            style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="1dp"
             android:layout_weight="3"
+            android:background="@drawable/blue_btn"
             android:text="Finn krengevinkel" />
     </LinearLayout>
 

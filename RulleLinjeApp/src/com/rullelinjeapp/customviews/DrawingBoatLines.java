@@ -131,7 +131,7 @@ public class DrawingBoatLines extends View {
 				drawables[angleIndex]);
 		Matrix matrix = new Matrix();
 		double rad = -angles.get(angleIndex);
-		float sin = (float) Math.sin(rad);
+		float sin = (float) Math.sin(rad); 
 		float cos = (float) Math.cos(rad);
 		float[] points = {
 				cos,
