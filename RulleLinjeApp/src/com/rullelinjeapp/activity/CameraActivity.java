@@ -97,16 +97,15 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
 		float angleTemp = mValuesOrientation[1];
 		double angle;
-		 if(mValuesOrientation[2]>0){
-			 angle = (Math.PI / 2) - Math.abs(angleTemp) -(Math.PI / 2);
-		 }
-		 else{
-			 angle = (Math.PI / 2) - Math.abs(angleTemp);
-		 }
-		
-//		logm("verdi 1:" + mValuesOrientation[0] * (180 / Math.PI)
-//				+ "   verdi 2 " + mValuesOrientation[1] * (180 / Math.PI)
-//				+ " verdi 3 " + mValuesOrientation[2] * (180 / Math.PI));
+//		if (mValuesOrientation[2] > 0) {
+//			angle = (Math.PI / 2) - Math.abs(angleTemp) - (Math.PI / 2);
+//		} else {
+			angle = (Math.PI / 2) - Math.abs(angleTemp);
+//		}
+
+		// logm("verdi 1:" + mValuesOrientation[0] * (180 / Math.PI)
+		// + "   verdi 2 " + mValuesOrientation[1] * (180 / Math.PI)
+		// + " verdi 3 " + mValuesOrientation[2] * (180 / Math.PI));
 
 		logm("found angle: " + angle * (180 / Math.PI) + " grader");
 		Intent resultIntent = new Intent();

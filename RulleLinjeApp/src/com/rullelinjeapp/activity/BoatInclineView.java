@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -197,8 +198,13 @@ public class BoatInclineView extends Activity {
 		}
 		int angleIndex = angleLineView.setAngle(angle);
 		if (angleIndex > 2) {
-			((Button) findViewById(id.finnKrengeVinkel_Result))
-					.setEnabled(false);
+			Button finnKrengeVinkelButton = ((Button) findViewById(id.finnKrengeVinkel_Result));
+			finnKrengeVinkelButton.setEnabled(false);
+			float alpha = 0.60f;
+			AlphaAnimation alphaUp = new AlphaAnimation(alpha, alpha);
+			alphaUp.setFillAfter(true);
+			finnKrengeVinkelButton.startAnimation(alphaUp);
+
 		}
 		angleButtons.get(angleIndex).setVisibility(0);
 
