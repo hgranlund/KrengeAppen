@@ -211,20 +211,20 @@ public class BoatInclineView extends Activity {
 	}
 
 	// andoird menu
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, ID_MENU_SAVE_CANVAS, Menu.NONE,
-				R.string.menu_save_all_lines);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == ID_MENU_SAVE_CANVAS) {
-			saveAllAngleLines();
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		menu.add(Menu.NONE, ID_MENU_SAVE_CANVAS, Menu.NONE,
+//				R.string.menu_save_all_lines);
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		if (item.getItemId() == ID_MENU_SAVE_CANVAS) {
+//			saveAllAngleLines();
+//			return true;
+//		}
+//		return false;
+//	}
 
 }
