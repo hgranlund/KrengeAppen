@@ -63,9 +63,14 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 			}
 
 			public void onSensorChanged(SensorEvent event) {
+
 				switch (event.sensor.getType()) {
 				case Sensor.TYPE_ACCELEROMETER:
 					System.arraycopy(event.values, 0, mValuesAccel, 0, 3);
+					// logm("x="+event.values[0]+ "    y=" +event.values[1]+
+					// "    z="+event.values[2]+ "    angle="
+					// +Math.atan2(event.values[0],
+					// event.values[1])/(Math.PI/180));
 					break;
 
 				case Sensor.TYPE_MAGNETIC_FIELD:
@@ -91,8 +96,19 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 				mValuesMagnet);
 		SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
 		float angleTemp = mValuesOrientation[1];
-		double angle = (Math.PI / 2) - Math.abs(mValuesOrientation[1]);
-		logm("found angle: " + angle * (180 / Math.PI) + "grader");
+		double angle;
+		 if(mValuesOrientation[2]>0){
+			 angle = (Math.PI / 2) - Math.abs(angleTemp) -(Math.PI / 2);
+		 }
+		 else{
+			 angle = (Math.PI / 2) - Math.abs(angleTemp);
+		 }
+		
+//		logm("verdi 1:" + mValuesOrientation[0] * (180 / Math.PI)
+//				+ "   verdi 2 " + mValuesOrientation[1] * (180 / Math.PI)
+//				+ " verdi 3 " + mValuesOrientation[2] * (180 / Math.PI));
+
+		logm("found angle: " + angle * (180 / Math.PI) + " grader");
 		Intent resultIntent = new Intent();
 		resultIntent.putExtra("angle", angle);
 		setResult(Activity.RESULT_OK, resultIntent);
@@ -192,7 +208,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		dialog.setContentView(R.layout.dialog_instruksjoner_camera);
 		dialog.setTitle("Instruksjoner");
 
-		Button dialogButton = (Button) dialog.findViewById(R.id.dialogKameraButtonOK);
+		Button dialogButton = (Button) dialog
+				.findViewById(R.id.dialogKameraButtonOK);
 		dialogButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
