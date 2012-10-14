@@ -97,16 +97,26 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
 		float angleTemp = mValuesOrientation[1];
 		double angle;
-//		if (mValuesOrientation[2] > 0) {
-//			angle = (Math.PI / 2) - Math.abs(angleTemp) - (Math.PI / 2);
-//		} else {
-			angle = (Math.PI / 2) - Math.abs(angleTemp);
-//		}
-
-		// logm("verdi 1:" + mValuesOrientation[0] * (180 / Math.PI)
-		// + "   verdi 2 " + mValuesOrientation[1] * (180 / Math.PI)
-		// + " verdi 3 " + mValuesOrientation[2] * (180 / Math.PI));
-
+		for (int i = 0; i < mRotationMatrix.length; i++) {
+			logm(Float.toString(mRotationMatrix[i]));
+		}
+		
+		
+		
+//		Denne tar hansyn til tilting i alle retninger
+//			angle = (Math.PI / 2) - Math.abs(angleTemp);
+//		Denne Ser bare på tilting om en akse.
+			angle =-Math.atan2(mRotationMatrix[6], mRotationMatrix[7]);
+//			
+//			 logm("vinkel 1:" + Math.acos(mRotationMatrix[8]) * (180 / Math.PI)
+//					 + "   vinkel 2 " + Math.atan2(mRotationMatrix[6], mRotationMatrix[7]) * (180 / Math.PI)
+//					 + " vinkel 3 " + Math.atan2(mRotationMatrix[2], mRotationMatrix[5]) * (180 / Math.PI));
+//
+//
+//		 logm("verdi 1:" + mValuesOrientation[0] * (180 / Math.PI)
+//		 + "   verdi 2 " + mValuesOrientation[1] * (180 / Math.PI)
+//		 + " verdi 3 " + mValuesOrientation[2] * (180 / Math.PI));
+//
 		logm("found angle: " + angle * (180 / Math.PI) + " grader");
 		Intent resultIntent = new Intent();
 		resultIntent.putExtra("angle", angle);
