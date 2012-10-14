@@ -80,9 +80,12 @@ public class DrawingBoatLines extends View {
 	}
 
 	private float[] getPointsFromAngle(double angle) {
+		float[] points = new float[4];
 		float kat = (float) Math.tan(angle) * getWidth() / 2;
-		float[] points = { 0, Math.max(getXAxes() + kat, (float) getTop()),
-				getWidth(), Math.min(getXAxes() - kat, (float) gridBottom) };
+		points[0] = 0;
+		points[2] = getWidth();
+		points[1] = getXAxes() + kat;
+		points[3] = getXAxes() - kat;
 		return points;
 	}
 
@@ -131,7 +134,7 @@ public class DrawingBoatLines extends View {
 				drawables[angleIndex]);
 		Matrix matrix = new Matrix();
 		double rad = -angles.get(angleIndex);
-		float sin = (float) Math.sin(rad); 
+		float sin = (float) Math.sin(rad);
 		float cos = (float) Math.cos(rad);
 		float[] points = {
 				cos,
