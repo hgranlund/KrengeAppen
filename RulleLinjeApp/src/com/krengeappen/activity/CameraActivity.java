@@ -215,7 +215,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 	void setUpDialog() {
 		
 		final Dialog dialog = new Dialog(context);
-		dialog.setContentView(R.layout.dialog_instruksjoner);
+		dialog.setContentView(R.layout.dialog_instruksjoner_camera);
 		dialog.setTitle("Instruksjoner");
 		
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
