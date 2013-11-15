@@ -1,4 +1,4 @@
-package com.rullelinjeapp.customviews;
+package com.krengeappen.customviews;
 
 import android.content.Context;
 import android.graphics.Canvas;

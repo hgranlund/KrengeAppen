@@ -1,4 +1,4 @@
-package com.rullelinjeapp.activity;
+package com.krengeappen.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.rullelinjeapp.R;
+import com.krengeappen.R;
 
 public class MainActivity extends Activity {
 

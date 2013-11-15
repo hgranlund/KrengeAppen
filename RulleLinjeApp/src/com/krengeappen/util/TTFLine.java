@@ -1,4 +1,4 @@
-package com.rullelinjeapp.util;
+package com.krengeappen.util;
 
 import java.util.ArrayList;
 

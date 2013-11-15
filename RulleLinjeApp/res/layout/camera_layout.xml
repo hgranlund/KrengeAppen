@@ -8,7 +8,7 @@
         android:layout_height="fill_parent"
         android:keepScreenOn="true" />
 
-    <com.rullelinjeapp.customviews.CameraLineView
+    <com.krengeappen.customviews.CameraLineView
         android:id="@+id/cameraLineView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

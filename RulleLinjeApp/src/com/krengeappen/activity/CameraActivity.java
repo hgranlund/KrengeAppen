@@ -1,4 +1,4 @@
-package com.rullelinjeapp.activity;
+package com.krengeappen.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -23,7 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.rullelinjeapp.R;
+import com.krengeappen.R;
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
@@ -212,13 +212,13 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
 	}
 
-	private void setUpDialog() {
+	void setUpDialog() {
+		
 		final Dialog dialog = new Dialog(context);
-		dialog.setContentView(R.layout.dialog_instruksjoner_camera);
+		dialog.setContentView(R.layout.dialog_instruksjoner);
 		dialog.setTitle("Instruksjoner");
-
-		Button dialogButton = (Button) dialog
-				.findViewById(R.id.dialogKameraButtonOK);
+		
+		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 		dialogButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {

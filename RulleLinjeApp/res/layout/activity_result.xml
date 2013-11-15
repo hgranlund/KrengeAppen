@@ -4,7 +4,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <com.rullelinjeapp.customviews.DrawingBoatLines
+    <com.krengeappen.customviews.DrawingBoatLines
         android:id="@+id/draw_boat_lines"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

@@ -1,4 +1,4 @@
-package com.rullelinjeapp.activity;
+package com.krengeappen.activity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +17,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -26,9 +24,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.rullelinjeapp.R;
-import com.rullelinjeapp.R.id;
-import com.rullelinjeapp.customviews.DrawingBoatLines;
+import com.krengeappen.R;
+
+import com.krengeappen.customviews.DrawingBoatLines;
 
 public class BoatInclineView extends Activity {
 	final static private String TAG = "##### BoatInclineView";
@@ -66,7 +64,7 @@ public class BoatInclineView extends Activity {
 		startCamera();
 
 		setUpButtons();
-		angleLineView = (DrawingBoatLines) findViewById(id.draw_boat_lines);
+		angleLineView = (DrawingBoatLines) findViewById(R.id.draw_boat_lines);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 	}
@@ -145,10 +143,10 @@ public class BoatInclineView extends Activity {
 
 	private void setUpButtons() {
 		angleButtons = new ArrayList<ImageButton>();
-		angleButtons.add((ImageButton) findViewById(id.boat1));
-		angleButtons.add((ImageButton) findViewById(id.boat2));
-		angleButtons.add((ImageButton) findViewById(id.boat3));
-		angleButtons.add((ImageButton) findViewById(id.boat4));
+		angleButtons.add((ImageButton) findViewById(R.id.boat1));
+		angleButtons.add((ImageButton) findViewById(R.id.boat2));
+		angleButtons.add((ImageButton) findViewById(R.id.boat3));
+		angleButtons.add((ImageButton) findViewById(R.id.boat4));
 		for (int i = 0; i < angleButtons.size(); i++) {
 			final int index = i;
 			angleButtons.get(i).setOnClickListener(new OnClickListener() {
@@ -198,7 +196,7 @@ public class BoatInclineView extends Activity {
 		}
 		int angleIndex = angleLineView.setAngle(angle);
 		if (angleIndex > 2) {
-			Button finnKrengeVinkelButton = ((Button) findViewById(id.finnKrengeVinkel_Result));
+			Button finnKrengeVinkelButton = ((Button) findViewById(R.id.finnKrengeVinkel_Result));
 			finnKrengeVinkelButton.setEnabled(false);
 			float alpha = 0.60f;
 			AlphaAnimation alphaUp = new AlphaAnimation(alpha, alpha);

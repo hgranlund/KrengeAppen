@@ -1,4 +1,4 @@
-package com.rullelinjeapp.customviews;
+package com.krengeappen.customviews;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.rullelinjeapp.R;
+import com.krengeappen.R;
 
 public class DrawingBoatLines extends View {
 	final static private String TAG = "##### DrawingBoatLines";
