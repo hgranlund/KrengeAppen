@@ -8,19 +8,7 @@
         android:layout_height="fill_parent"
         android:background="#FFFFFF"
         android:orientation="vertical" >
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/camera_instructions_1" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/camera_instructions_2" />
-
+	
         <TextView
             android:id="@+id/dialog_text_camera"
             android:layout_width="fill_parent"
@@ -29,8 +17,16 @@
             android:text="@string/instruksjoner_kamera"
             android:textColor="#000" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_instructions" />
+
+
+
         <Button
-            android:id="@+id/dialogKameraButtonOK"
+            android:id="@+id/dialogButtonOK"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
