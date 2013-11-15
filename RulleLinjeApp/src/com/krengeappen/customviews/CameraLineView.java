@@ -41,16 +41,22 @@ public class CameraLineView extends View {
 		int numberOfLines = getHeight() / cellWidth;
 		return (int) (numberOfLines * 2.0 / 3.0 * cellWidth);
 	}
+	private int getYAxes() {
+		int numberOfLines = getWidth() / cellWidth;
+		return (int) (numberOfLines / 2.0 * cellWidth);
+	}
 
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		float yAxes = getYAxes();
 		float xAxes = getXAxes();
 		red.setColor(Color.RED);
 		red.setStrokeWidth(8);
 		int lineOffset= getWidth()/8;
 		canvas.drawLine(0+lineOffset,xAxes,getWidth()-lineOffset, xAxes, red);
+		canvas.drawLine(yAxes,xAxes,yAxes, xAxes-(lineOffset*3), red);
 		logm("Views height: " + getHeight() + " Views width: " + getWidth()
 				+ " viewTop: " + getTop() + " viewBottom: " + getBottom()
 				+ " myBottom: " + gridBottom);
