@@ -132,7 +132,7 @@ public class DrawingBoatLines extends View {
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
 						% lenPaints]);
 			}
-			canvas.drawText(angle_str, getWidth() - cellWidth*6, cellWidth*6, paints[selectedAngleIndex % lenPaints]);
+			canvas.drawText(angle_str, getWidth() - cellWidth*7, cellWidth*8, paints[selectedAngleIndex % lenPaints]);
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(0);
 			drawKrengeBoat(selectedAngleIndex, canvas);
 		} else {
