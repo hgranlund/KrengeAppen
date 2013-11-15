@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+
 import com.krengeappen.R;
 
 public class DrawingBoatLines extends View {
@@ -111,21 +112,49 @@ public class DrawingBoatLines extends View {
 		}
 		// draw angelLines
 		int lenPaints = paints.length;
+		String angle_str = "";
+		double angle = 0;
 		if (angleToDraw == 999) {
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(5);
+			paints[selectedAngleIndex % lenPaints].setTextSize(cellWidth*2);
 			for (int i = 0; i < angles.size(); i++) {
+				angle = angles.get(i)*10;
+				angle = Math.round(angle);
+				angle = angle/10;
+				if (angle == 0){
+					angle_str = "0.0°";
+				}
+				else{
+					
+					angle_str = ""+angle+ '°';
+				}
+				
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
 						% lenPaints]);
 			}
+			canvas.drawText(angle_str, getWidth() - cellWidth*6, cellWidth*6, paints[selectedAngleIndex % lenPaints]);
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(0);
 			drawKrengeBoat(selectedAngleIndex, canvas);
 		} else {
+			angle = angles.get(angleToDraw)*10;
+			angle = Math.round(angle);
+			angle = angle/10;
+			if (angle == 0){
+				angle_str = "0.0°";
+			}
+			else{
+				
+				angle_str = ""+angle+ '°';
+			}
 			paints[angleToDraw % lenPaints].setStrokeWidth(5);
+			paints[angleToDraw % lenPaints].setTextSize(cellWidth*2);
+			canvas.drawText(angle_str, getWidth() - cellWidth*6, cellWidth*6, paints[angleToDraw % lenPaints]);
 			canvas.drawLines(getPointsFromAngle(angles.get(angleToDraw)),
 					paints[angleToDraw % lenPaints]);
 			paints[angleToDraw % lenPaints].setStrokeWidth(0);
 			drawKrengeBoat(angleToDraw, canvas);
 		}
+		
 		// TODO draw angle half circle
 	}
 
