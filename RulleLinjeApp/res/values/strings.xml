@@ -5,7 +5,17 @@
     <string name="menu_save_all_lines">Lagre krengevinkler</string>
     <string name="title_activity_main">KrengeApp</string>
     <string name="title_activity_result">Resultat</string>
-    <string name="instruksjoner_kamera">Hold telefonen opp mot karet med båten i og drei telefonen til den røde stripen stemmer overens med ripa (toppkanten) av båten. Trykk så på «Finn krengevinkel».</string>
+    <string name="instruksjoner_kamera">Klikk på Finn krengevinkel. Her vil du på opp kamera og to røde streker. \n\n
+
+Snu på telefonen til de to røde strekene stemmer overens med masten og ripa på båten (se bildet under). \n\n
+
+Det er lettest om du peker kameraet mot bøten rett forfra eller rett bakfra. \n\n
+
+For å ta bildet, trykk igjen på Finn krengevinkel. \n\n
+
+Tips! Du kan ta fire bilder av gangen. Prøv og se om du kan sammenligne forskjellige båters krenginger. \n\n
+
+NB! Husk å sende bildene på epost når du er ferdig.  </string>
     <string name="instruksjoner_hovedside">KrengeApp er en applikasjon som lar deg plotte krengningen til en båt. For å komme i gang trykker du på knappen «Finn krengevinkel». Dette tar deg til en side hvor du kan bruke kameraet på mobiltelefonen til å finne krengningen til båten. Se instruksjonene på denne siden for en mer detaljert beskrivelse av hvordan dette gjøres.\n\n
 
 Når du har funnet krengningen, vil du bli tatt med til en side hvor du kan se resultatet tegnet opp i et rutenett. På denne siden kan du også velge å finne flere krengevinkler, lagre resultatene dine på mobiltelefonen eller sende resultatene til din egen mail.\n\n
