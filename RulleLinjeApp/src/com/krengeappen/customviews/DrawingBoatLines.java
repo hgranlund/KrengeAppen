@@ -1,5 +1,6 @@
 package com.krengeappen.customviews;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -44,7 +45,7 @@ public class DrawingBoatLines extends View {
 	}
 
 	public int setAngle(double angle) {
-		angles.add(angle);
+		angles.add(-angle);
 		selectedAngleIndex = angles.size() - 1;
 		this.invalidate();
 		return selectedAngleIndex;
@@ -113,20 +114,20 @@ public class DrawingBoatLines extends View {
 		// draw angelLines
 		int lenPaints = paints.length;
 		String angle_str = "";
-		double angle = 0;
+		double angle_deg = 0;
 		if (angleToDraw == 999) {
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(5);
 			paints[selectedAngleIndex % lenPaints].setTextSize(cellWidth*2);
 			for (int i = 0; i < angles.size(); i++) {
-				angle = angles.get(i)*10;
-				angle = Math.round(angle);
-				angle = angle/10;
-				if (angle == 0){
-					angle_str = "0.0°";
+				angle_deg = Math.abs(angles.get(i));
+				angle_deg=angle_deg*180/Math.PI;
+				angle_deg = Math.round(angle_deg);
+				if (angle_deg == 0){
+					angle_str = "0°";
 				}
 				else{
 					
-					angle_str = ""+angle+ '°';
+					angle_str = ""+new DecimalFormat("#").format(angle_deg)+ '°';
 				}
 				
 				canvas.drawLines(getPointsFromAngle(angles.get(i)), paints[i
@@ -136,15 +137,15 @@ public class DrawingBoatLines extends View {
 			paints[selectedAngleIndex % lenPaints].setStrokeWidth(0);
 			drawKrengeBoat(selectedAngleIndex, canvas);
 		} else {
-			angle = angles.get(angleToDraw)*10;
-			angle = Math.round(angle);
-			angle = angle/10;
-			if (angle == 0){
-				angle_str = "0.0°";
+			angle_deg = Math.abs(angles.get(angleToDraw));
+			angle_deg=angle_deg*180/Math.PI;
+			angle_deg = Math.round(angle_deg);
+			if (angle_deg == 0){
+				angle_str = "0°";
 			}
 			else{
 				
-				angle_str = ""+angle+ '°';
+				angle_str = ""+new DecimalFormat("#").format(angle_deg)+ '°';
 			}
 			paints[angleToDraw % lenPaints].setStrokeWidth(5);
 			paints[angleToDraw % lenPaints].setTextSize(cellWidth*2);
